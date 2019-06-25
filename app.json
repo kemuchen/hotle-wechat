@@ -1,23 +1,42 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/home/home",
+    "pages/order/index",
+    "pages/service/service",
+    "pages/personal/personal"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "亿游网",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "selectedColor": "#F98941",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "首页"
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/resources/images/home/home_1.png",
+        "selectedIconPath": "/resources/images/home/home.png"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "日志"
+        "pagePath": "pages/order/index",
+        "text": "订单",
+        "iconPath": "/resources/images/home/order_1.png",
+        "selectedIconPath": "/resources/images/home/order.png"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "在住服务",
+        "iconPath": "/resources/images/home/zzfw_1.png",
+        "selectedIconPath": "/resources/images/home/zzfw.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "我的",
+        "iconPath": "/resources/images/home/user_1.png",
+        "selectedIconPath": "/resources/images/home/user.png"
       }
     ]
   },
