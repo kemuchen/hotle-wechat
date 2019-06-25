@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/order/index",
+    "pages/order/order",
     "pages/service/service",
     "pages/personal/personal"
   ],
@@ -21,7 +21,7 @@
         "selectedIconPath": "/resources/images/home/home.png"
       },
       {
-        "pagePath": "pages/order/index",
+        "pagePath": "pages/order/order",
         "text": "订单",
         "iconPath": "/resources/images/home/order_1.png",
         "selectedIconPath": "/resources/images/home/order.png"
