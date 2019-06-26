@@ -70,6 +70,7 @@
 <view class="calendar-box" hidden="{{isHidden}}">
   <view class="calendar">
     <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
-    <calendar cell-size="20" active-type="square" binddayClick="handleSelectDate" moreDays="true"/>
+    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true"
+    show-more-days="true"/>
   </view>
 </view>
