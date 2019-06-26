@@ -1,9 +1,9 @@
 <!-- 图片轮播 -->
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}"            interval="{{interval}}" duration="{{duration}}" circular="true">
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">
   <block wx:for="{{ImageList}}">
     <swiper-item>
       <navigator url="{{item.link}}">
-        <image src="{{item.url}}" class="slide-image"/>
+        <image src="{{item.url}}" class="slide-image" />
       </navigator>
     </swiper-item>
   </block>
@@ -14,23 +14,23 @@
   <!-- 入住类型 -->
   <view class="search-rzlx">
     <view class="search-rzlx-item">
-      <image src="{{qrImage}}" class="search-item-icon"/>全日
+      <image src="{{qrImage}}" class="search-item-icon" />全日
     </view>
     <view class="search-rzlx-item">
-      <image src="{{dyImage}}" class="search-item-icon"/>度夜
+      <image src="{{dyImage}}" class="search-item-icon" />度夜
     </view>
     <view class="search-rzlx-item">
-      <image src="{{zdImage}}" class="search-item-icon"/>钟点房
+      <image src="{{zdImage}}" class="search-item-icon" />钟点房
     </view>
   </view>
 
   <!-- 定位 -->
   <view class="search-location">
     <view>
-      <image src="{{searchImage}}" class="search-item-icon"/>十堰
+      <image src="{{searchImage}}" class="search-item-icon" />十堰
     </view>
     <view>
-      <image src="{{locationImage}}" class="search-item-icon"/>我的位置
+      <image src="{{locationImage}}" class="search-item-icon" />我的位置
     </view>
   </view>
 
@@ -40,14 +40,14 @@
     <view bindtap="selectRzsj" class="search-rzsj-item-sj">
       <view class="search-rzsj-item-rz">入住</view>
       <view class="search-rzsj-item-rq">
-        <image src="{{calendarImage}}" class="search-item-icon"/>06月27</view>
+        <image src="{{calendarImage}}" class="search-item-icon" />{{rzsj}}</view>
       <view class="search-rzsj-item-week">星期四 14:00</view>
     </view>
     <!-- 天数 -->
     <view class="search-rzsj-item-ts">
       <view class="search-rzsj-item-rz">|</view>
       <view class="search-rzsj-item-rq">
-        二天
+        {{rzts}}
       </view>
       <view class="search-rzsj-item-week">|</view>
     </view>
@@ -56,19 +56,20 @@
     <view bindtap="selectRzsj" class="search-rzsj-item-sj">
       <view class="search-rzsj-item-rz">离店</view>
       <view class="search-rzsj-item-rq">
-        <image src="{{calendarImage}}" class="search-item-icon"/>06月27</view>
+        <image src="{{calendarImage}}" class="search-item-icon" />{{ldsj}}</view>
       <view class="search-rzsj-item-week">星期四 14:00</view>
     </view>
   </view>
 
   <!-- 搜索按钮 -->
   <button class="searchButton">
-      <image src="{{searchBtnImage}}" class="search-item-icon"/>搜索房间
-    </button>
+    <image src="{{searchBtnImage}}" class="search-item-icon" />搜索房间
+  </button>
 </view>
 
-
-<view class="calendar" hidden="{{isHidden}}">
-  <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
-  <calendar cell-size="30" header-style="demo3-header" board-style="demo3-board"          weeks-type="cn" />
+<view class="calendar-box" hidden="{{isHidden}}">
+  <view class="calendar">
+    <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
+    <calendar cell-size="20" active-type="square" binddayClick="handleSelectDate" moreDays="true"/>
+  </view>
 </view>
