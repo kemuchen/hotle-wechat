@@ -1,6 +1,6 @@
 /* pages/order/order.wxss */
 page{
-  background-color: #EBE7E2;
+  background-color: #f5f5f5;
 }
 .swiper-tab {
   width: 90%;
