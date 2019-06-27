@@ -16,6 +16,9 @@ Page({
 
   },
 
+  /**
+   * 切换tab页
+   */
   swichNav: function(e) {
     if (this.data.currentTab === e.target.dataset.current) {
       return false;

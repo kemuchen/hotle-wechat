@@ -112,5 +112,14 @@ Page({
   // 格式化日期
   formaDate: function(date) {
     return util.dateUtil.formatNum(date.year) + '-' + util.dateUtil.formatNum(date.month) + '-' + util.dateUtil.formatNum(date.day)
+  },
+
+  /**
+   * 跳转到搜索房间界面
+   */
+  searchRoom: function() {
+    wx.navigateTo({
+      url: '/pages/home/search/search',
+    })
   }
 })

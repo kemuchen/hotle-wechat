@@ -1,0 +1,54 @@
+<!--pages/home/search/search.wxml-->
+<!-- 顶部tab导航 -->
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">挑选房间</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">酒店特卖</view>
+</view>
+
+<!-- 搜索框 -->
+<view class="search">
+  <view class="search-box">
+    <view class="search-box-add">十堰市</view>
+    <view class="triangle-down"></view>
+    <view class="search-box-splid"> | </view>
+    <image src="{{searchImage}}" class="search-icon"></image>
+    <view class="search-placeholder">酒店/位置/关键字</view>
+  </view>
+</view>
+
+<!-- 排序条件 -->
+<view class="order-condition">
+  <view class="order-condition-item">06.27-06.28<view class="triangle-down"></view></view>
+  <view class="order-condition-item">区域<view class="triangle-down"></view></view>
+  <view class="order-condition-item">推荐排序<view class="triangle-down"></view></view>
+  <view class="order-condition-item">短租<view class="triangle-down"></view></view>
+</view>
+
+
+<!-- 房间列表 -->
+<view class="room-list">
+  <!-- 左侧筛选条件 -->
+  <view class="room-list-left">
+    <view class="room-list-left-item">门店选房</view>
+    <view class="room-list-left-item">房型筛选</view>
+    <view class="room-list-left-item">更多条件</view>
+  </view>
+
+  <!-- 右侧房间列表 -->
+  <view class="room-lis-right" style="height: {{roomListHeight}}px;">
+    <scroll-view class="tjfy-box" scroll-y>
+      <view class="tjfy-box-fy" wx:for="{{tjfyList}}">
+        <!-- 房源图片 -->
+        <view class="tjfy-box-fy-image"><image src="{{item.url}}" class="tjfy-box-fy-image"/></view>
+        <!-- 房源描述 -->
+        <view class="tjfy-box-fy-fypf">
+          <view>{{item.fyxj}}</view>
+          <view>评分：{{item.fypf}}</view>
+        </view>
+        <view class="tjfy-box-fy-fymc">{{item.fymc}}</view>
+        <view><text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
+          <text style="font-size: 20rpx;">起/晚</text></view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

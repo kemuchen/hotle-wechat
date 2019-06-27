@@ -62,7 +62,7 @@
   </view>
 
   <!-- 搜索按钮 -->
-  <button class="searchButton">
+  <button class="searchButton" bindtap="searchRoom">
     <image src="{{searchBtnImage}}" class="search-item-icon" />搜索房间
   </button>
 </view>
