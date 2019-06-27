@@ -1,2 +1,72 @@
 <!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+<!-- 顶部tab导航 -->
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">全部订单</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">待支付</view>
+  <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">待入住</view>
+  <view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}}" data-current="4" bindtap="swichNav">入住中</view>
+  <view class="swiper-tab-list {{currentTab==5 ? 'on' : ''}}" data-current="5" bindtap="swichNav">已取消</view>
+  <view class="swiper-tab-list {{currentTab==6 ? 'on' : ''}}" data-current="6" bindtap="swichNav">待评价</view>
+</view>
+
+<!-- 订单列表 -->
+<view class="orderlist-box">
+  <view class="order-item">
+    <!-- 订单标题 -->
+    <view class="order-item-title">
+      <view class="order-item-title-fjmc">精致大床房</view>
+      <view class="order-item-title-ddzt">已取消</view>
+    </view>
+
+    <!-- 订单信息 -->
+    <view class="order-item-info">
+      <view class="order-item-info-image">
+        <image src="{{imageSrc}}" class="order-item-info-image-image"></image>
+      </view>
+      <view class="order-item-info-info">
+        <view class="order-item-info-fjxx">
+          <view>06/27 - 06/28</view>
+          <view>17楼 1729</view>
+        </view>
+        <view class="order-item-info-fyxx">
+          ￥0.00
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作 -->
+    <view class="order-item-oper">
+      <view><button class="order-item-oper-btn">再次预定</button></view>
+    </view>
+  </view>
+
+  <view class="order-item">
+    <!-- 订单标题 -->
+    <view class="order-item-title">
+      <view class="order-item-title-fjmc">精致大床房</view>
+      <view class="order-item-title-ddzt">已取消</view>
+    </view>
+
+    <!-- 订单信息 -->
+    <view class="order-item-info">
+      <view class="order-item-info-image">
+        <image src="{{imageSrc}}" class="order-item-info-image-image"></image>
+      </view>
+      <view class="order-item-info-info">
+        <view class="order-item-info-fjxx">
+          <view>06/27 - 06/28</view>
+          <view>17楼 1729</view>
+        </view>
+        <view class="order-item-info-fyxx">
+          ￥0.00
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作 -->
+    <view class="order-item-oper">
+      <view><button class="order-item-oper-btn">再次预定</button></view>
+      <view><button class="order-item-oper-btn">再次预定</button></view>
+    </view>
+  </view>
+</view>

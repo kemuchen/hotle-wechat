@@ -796,7 +796,7 @@ Component({
           dateEnd = undefined;
           // 睡眠3秒
           let start = new Date().getTime();
-          while (true) if (new Date().getTime() - start > 2000) break;
+          while (true) if (new Date().getTime() - start > 1000) break;
 
           this.triggerEvent('dayClick', eventDetail);
         }

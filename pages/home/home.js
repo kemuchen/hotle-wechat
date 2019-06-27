@@ -40,7 +40,34 @@ Page({
     isHidden: true,
     rzsj: '6月27',
     ldsj: '6月28',
-    rzts: '一天'
+    rzts: '一天',
+    tjfyList: [
+      {
+        url: '/resources/images/1.jpg',
+        fyxj: '三星级',
+        fypf: 3.0,
+        fymc: '精致大床房',
+        fyjg: 188
+      }, {
+        url: '/resources/images/2.jpg',
+        fyxj: '四星级',
+        fypf: 5.0,
+        fymc: '豪华大床房',
+        fyjg: 256
+      }, {
+        url: '/resources/images/3.jpg',
+        fyxj: '四星级',
+        fypf: 4.0,
+        fymc: '双人房',
+        fyjg: 220
+      }, {
+        url: '/resources/images/4.jpg',
+        fyxj: '三星级',
+        fypf: 5.0,
+        fymc: '精致大床房',
+        fyjg: 188
+      }
+    ]
   },
 
   /**
@@ -68,12 +95,22 @@ Page({
     })
   },
 
+  // 处理日期选择事件
   handleSelectDate(e) {
-    console.log(e);
+    let dateStart = e.detail.dateStart;
+    let dateEnd = e.detail.dateEnd;
+    let rzts = util.dateUtil.dateDiff(this.formaDate(dateEnd), this.formaDate(dateStart));
+    console.log(rzts);
     this.setData({
       isHidden: true,
-      rzsj: util.dateUtil.formatNum(e.detail.dateStart.month) + '月' + util.dateUtil.formatNum(e.detail.dateStart.day) + '日',
-      ldsj: util.dateUtil.formatNum(e.detail.dateEnd.month) + '月' + util.dateUtil.formatNum(e.detail.dateEnd.day) + '日'
+      rzsj: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
+      ldsj: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
+      rzts: util.dateUtil.convertToChinaNum(rzts) + '天'
     })
   },
+
+  // 格式化日期
+  formaDate: function(date) {
+    return util.dateUtil.formatNum(date.year) + '-' + util.dateUtil.formatNum(date.month) + '-' + util.dateUtil.formatNum(date.day)
+  }
 })

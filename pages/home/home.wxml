@@ -67,6 +67,34 @@
   </button>
 </view>
 
+<!-- 推荐房源标题 -->
+<view class="tjfy-box-title">
+  <view class="tjfy-box-title-tj">推荐房源</view>
+  <view class="tjfy-box-title-lj">查看更多房源 ></view>
+</view>
+
+<!-- 房源展示 -->
+<scroll-view class="tjfy-box" scroll-x>
+  <view class="tjfy-box-fy" wx:for="{{tjfyList}}">
+    <!-- 房源图片 -->
+    <view class="tjfy-box-fy-image"><image src="{{item.url}}" class="tjfy-box-fy-image"/></view>
+    <!-- 房源描述 -->
+    <view class="tjfy-box-fy-fypf">
+      <view>{{item.fyxj}}</view>
+      <view>评分：{{item.fypf}}</view>
+    </view>
+    <view class="tjfy-box-fy-fymc">{{item.fymc}}</view>
+    <view><text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
+      <text style="font-size: 20rpx;">起/晚</text></view>
+  </view>
+</scroll-view>
+
+<!-- 400电话 -->
+<view class='kfrx'>
+  客服热线：400-666-1111
+</view>
+
+<!-- 日历组件 -->
 <view class="calendar-box" hidden="{{isHidden}}">
   <view class="calendar">
     <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
