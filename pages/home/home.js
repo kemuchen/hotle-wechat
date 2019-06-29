@@ -30,13 +30,14 @@ Page({
     autoplay: true, //是否自动轮播
     interval: 3000, //间隔时间
     duration: 300, //滑动时间
-    qrImage: '/resources/images/home/qr.png',
-    dyImage: '/resources/images/home/dy.png',
-    zdImage: '/resources/images/home/zd.png',
+    qrImage: '/resources/images/home/qr',
+    dyImage: '/resources/images/home/dy',
+    zdImage: '/resources/images/home/zd',
     searchImage: '/resources/images/home/search.png',
     locationImage: '/resources/images/home/location.png',
     calendarImage: '/resources/images/home/calendar.png',
     searchBtnImage: '/resources/images/home/search_w.png',
+    rightArrowImage: '/resources/images/right-arr.png',
     isHidden: true,
     rzsj: '6月27',
     ldsj: '6月28',
@@ -67,7 +68,8 @@ Page({
         fymc: '精致大床房',
         fyjg: 188
       }
-    ]
+    ],
+    currentRzlx: 1
   },
 
   /**
@@ -121,5 +123,14 @@ Page({
     wx.navigateTo({
       url: '/pages/home/search/search',
     })
+  },
+
+  /**
+   * 选择入住类型
+   */
+  selectRzlx: function(e) {
+    this.setData({
+      currentRzlx: e.currentTarget.dataset.rzlx
+    });
   }
 })

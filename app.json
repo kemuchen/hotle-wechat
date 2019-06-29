@@ -1,10 +1,16 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/order/order",
     "pages/service/service",
+    "pages/order/order",
     "pages/personal/personal",
-    "pages/home/search/search"
+    "pages/home/search/search",
+    "pages/personal/money/money",
+    "pages/personal/coupon/coupon",
+    "pages/personal/yj/yj",
+    "pages/personal/fp/fp",
+    "pages/personal/sfrz/sfrz",
+    "pages/personal/cyrzr/cyrzr"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,2 +1,21 @@
 <!--pages/service/service.wxml-->
-<text>pages/service/service.wxml</text>
+<!-- 无可入住房间 -->
+<view class="no-room">
+  <view class="top-line">
+    <!-- 全部订单 -->
+    <view class="all-orders" bindtap="navigateToOrder">
+      <view>
+        <image class="order-image" src="{{orderImg}}"></image>
+      </view>
+      <view class="all-orders-text">全部订单</view>
+    </view>
+  </view>
+
+  <!-- 暂无可入住信息 -->
+  <view class="no-adviced-room">今天暂无可入住房间，快去预定吧</view>
+
+  <!-- 预定房间 -->
+  <button class="advince-room" bindtap="navigateToSearch">
+    去订房
+  </button>
+</view>

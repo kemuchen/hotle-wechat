@@ -33,10 +33,16 @@
 
 .search-rzlx-item {
   width: 33%;
+  height: 50px;
   font-size: 30rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.on {
+  color: #ea9518;
+  border-bottom: 1px solid #ea9518;
 }
 
 .search-item-icon {
@@ -104,15 +110,6 @@
   color: #000;
 }
 
-.searchButton {
-  width: 90%;
-  color: #ffffff;
-  height: 35px;
-  margin-top: 10px;
-  font-size: 35rpx;
-  background-color: #ea9518;
-}
-
 .calendar-box {
   position: absolute;
   bottom: 0px;
@@ -156,6 +153,8 @@
 }
 
 .tjfy-box-title-lj {
+  display: flex;
+  align-items: center;
   font-size: 30rpx;
   color: #707070;
 }
@@ -185,6 +184,7 @@
   width: 100%;
   height: 15px;
   font-size: 20rpx;
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
   color: #000;
@@ -200,7 +200,7 @@
   margin-top: 20px;
   margin-left: 25%;
   margin-bottom: 20px;
-  border: 1px solid #707070;
+  border: 1px solid #ADADAD;
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
   border-bottom-right-radius: 7px;

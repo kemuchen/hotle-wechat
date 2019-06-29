@@ -1,9 +1,6 @@
 <!--pages/home/search/search.wxml-->
 <!-- 顶部tab导航 -->
-<view class="swiper-tab">
-  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">挑选房间</view>
-  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">酒店特卖</view>
-</view>
+<tab tabList="{{tabList}}" bindswichNav="swichNav"></tab>
 
 <!-- 搜索框 -->
 <view class="search">
@@ -47,7 +44,7 @@
         </view>
         <view class="tjfy-box-fy-fymc">{{item.fymc}}</view>
         <view><text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
-          <text style="font-size: 20rpx;">起/晚</text></view>
+          <text style="font-size: 20rpx; margin-left: 5px;">起/晚</text></view>
       </view>
     </scroll-view>
   </view>

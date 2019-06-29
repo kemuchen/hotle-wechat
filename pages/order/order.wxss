@@ -2,53 +2,19 @@
 page{
   background-color: #f5f5f5;
 }
-.swiper-tab {
-  width: 90%;
-  border-bottom: 1rpx solid #e6e6e6;
-  text-align: center;
-  line-height: 80rpx;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 5%;
-  padding-right: 5%;
-  background-color: #fff;
-}
-
-.swiper-tab-list {
-  font-size: 30rpx;
-  display: inline-block;
-  border-bottom: 2rpx solid #fff;
-  color: #000;
-}
-
-.on {
-  color: #ea9518;
-  border-bottom: 5rpx solid #ea9518;
-}
-
-.swiper-box {
-  display: block;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.swiper-box view {
-  text-align: center;
-}
 
 .orderlist-box {
   width: 100%;
-  background-color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  margin-bottom: 5px;
 }
 
 .order-item {
-  margin-bottom: 5px;
-  width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
+  width: 95%;
   height: 180px;
-  background-color: #ffffff;
 }
 
 .order-item-title {
@@ -95,7 +61,7 @@ page{
 .order-item-info-info {
   margin-left: 10px;
   display: flex;
-  height: 110px;
+  height: 100px;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -121,7 +87,7 @@ page{
 .order-item-oper-btn {
   margin-left: 10px;
   height: 20px;
-  border: 1rpx solid #8F8B87;
+  border: 1rpx solid #A6A6A6;
   color: #8F8B87;
   font-size: 25rpx;
   border-bottom-left-radius: 10px;

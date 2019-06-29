@@ -6,7 +6,28 @@ Page({
    */
   data: {
     currentTab: 1,
-    imageSrc: '/resources/images/1.jpg'
+    imageSrc: '/resources/images/1.jpg',
+    tabList: [
+      {
+        index: 1,
+        name: '全部订单'
+      }, {
+        index: 2,
+        name: '待支付'
+      }, {
+        index: 3,
+        name: '待入住'
+      }, {
+        index: 4,
+        name: '入驻中'
+      }, {
+        index: 5,
+        name: '已取消'
+      }, {
+        index: 6,
+        name: '待评价'
+      }
+    ]
   },
 
   /**
@@ -20,12 +41,6 @@ Page({
    * 切换tab页
    */
   swichNav: function(e) {
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      this.setData({
-        currentTab: e.target.dataset.current
-      })
-    }
+    console.log(e.detail.currentTab);
   }
 })

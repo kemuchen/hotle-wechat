@@ -1,0 +1,30 @@
+<!--pages/personal/coupon/coupon.wxml-->
+<tab tabList="{{tabList}}" bindswichNav="swichNav"></tab>
+
+<!-- 优惠券列表 -->
+<view class="container">
+  <view class="no-coupon" wx:if="{{couponList.length == 0}}">
+    您暂未可使用的优惠券~
+  </view>
+  <view class="coupon-item" wx:for="{{couponList}}">
+    <!-- 左侧优惠券信息 -->
+    <view class="coupon-item-info-box">
+      <view class="coupon-item-info-box-child">
+        <view class="coupon-icon-box">
+          <image src="{{rmbImage}}" class="coupon-icon-image"></image>
+        </view>
+        <view class="coupon-item-info">
+          <view class="coupon-item-info-title">{{item.title}}【￥{{item.price}}】</view>
+          <view class="coupon-item-info-text">有效期：至{{item.yxq}}</view>
+          <view class="coupon-item-info-text">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 右侧优惠券面值 -->
+    <view class="coupon-item-price">
+      <view class="price">{{item.price}}</view>
+      <view class="yuan">元</view>
+    </view>
+  </view>
+</view>

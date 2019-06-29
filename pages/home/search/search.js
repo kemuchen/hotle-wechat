@@ -35,7 +35,16 @@ Page({
       }
     ],
     scrollTop: 100,
-    roomListHeight: 100
+    roomListHeight: 100,
+    tabList: [
+      {
+        index: 1,
+        name: '挑选房间'
+      }, {
+        index: 2,
+        name: '酒店特卖'
+      }
+    ]
   },
 
   /**

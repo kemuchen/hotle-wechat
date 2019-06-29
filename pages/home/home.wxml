@@ -13,14 +13,14 @@
 <view class="search">
   <!-- 入住类型 -->
   <view class="search-rzlx">
-    <view class="search-rzlx-item">
-      <image src="{{qrImage}}" class="search-item-icon" />全日
+    <view class="search-rzlx-item {{currentRzlx == 1 ? 'on' : ''}}" bindtap="selectRzlx" data-rzlx="1">
+      <image src="{{currentRzlx == 1 ? qrImage + '_1.png' : qrImage + '.png'}}" class="search-item-icon" />全日
     </view>
-    <view class="search-rzlx-item">
-      <image src="{{dyImage}}" class="search-item-icon" />度夜
+    <view class="search-rzlx-item {{currentRzlx == 2 ? 'on' : ''}}" bindtap="selectRzlx" data-rzlx="2">
+      <image src="{{currentRzlx == 2 ? dyImage + '_1.png' : dyImage + '.png'}}" class="search-item-icon" />度夜
     </view>
-    <view class="search-rzlx-item">
-      <image src="{{zdImage}}" class="search-item-icon" />钟点房
+    <view class="search-rzlx-item {{currentRzlx == 3 ? 'on' : ''}}" bindtap="selectRzlx" data-rzlx="3">
+      <image src="{{currentRzlx == 3 ? zdImage + '_1.png' : zdImage + '.png'}}" class="search-item-icon" />钟点房
     </view>
   </view>
 
@@ -62,7 +62,7 @@
   </view>
 
   <!-- 搜索按钮 -->
-  <button class="searchButton" bindtap="searchRoom">
+  <button class="common-btn" bindtap="searchRoom">
     <image src="{{searchBtnImage}}" class="search-item-icon" />搜索房间
   </button>
 </view>
@@ -70,22 +70,29 @@
 <!-- 推荐房源标题 -->
 <view class="tjfy-box-title">
   <view class="tjfy-box-title-tj">推荐房源</view>
-  <view class="tjfy-box-title-lj">查看更多房源 ></view>
+  <view class="tjfy-box-title-lj" bindtap="searchRoom">
+    <view>查看更多房源</view>
+    <image src="{{rightArrowImage}}" class="right-arrow" />
+  </view>
 </view>
 
 <!-- 房源展示 -->
 <scroll-view class="tjfy-box" scroll-x>
   <view class="tjfy-box-fy" wx:for="{{tjfyList}}">
     <!-- 房源图片 -->
-    <view class="tjfy-box-fy-image"><image src="{{item.url}}" class="tjfy-box-fy-image"/></view>
+    <view class="tjfy-box-fy-image">
+      <image src="{{item.url}}" class="tjfy-box-fy-image" />
+    </view>
     <!-- 房源描述 -->
     <view class="tjfy-box-fy-fypf">
       <view>{{item.fyxj}}</view>
       <view>评分：{{item.fypf}}</view>
     </view>
     <view class="tjfy-box-fy-fymc">{{item.fymc}}</view>
-    <view><text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
-      <text style="font-size: 20rpx;">起/晚</text></view>
+    <view>
+      <text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
+      <text style="font-size: 20rpx; margin-left: 5px;">起/晚</text>
+    </view>
   </view>
 </scroll-view>
 
@@ -98,7 +105,6 @@
 <view class="calendar-box" hidden="{{isHidden}}">
   <view class="calendar">
     <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
-    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true"
-    show-more-days="true"/>
+    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" />
   </view>
 </view>

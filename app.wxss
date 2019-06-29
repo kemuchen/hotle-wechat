@@ -5,6 +5,41 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 10;
   box-sizing: border-box;
 } 
+
+.right-arrow {
+  margin-left: 5px;
+  width: 10px;
+  height: 10px;
+}
+
+.common-btn {
+  width: 90%;
+  color: #ffffff;
+  height: 35px;
+  margin-top: 10px;
+  font-size: 35rpx;
+  background-color: #ea9518;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.common-help {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bfbfbf;
+  font-size: 25rpx;
+  margin-top: 20px;
+}
+
+.common-help-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+}
