@@ -1,11 +1,11 @@
-// pages/personal/sfrz/sfrz.js
+// pages/personal/cyrzr/tjrzr/tjrzr.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cameraImage: '/resources/images/user/camera.png'
+
   },
 
   /**

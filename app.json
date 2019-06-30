@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/service/service",
+    "pages/home/home",
     "pages/order/order",
     "pages/personal/personal",
     "pages/home/search/search",
@@ -10,13 +10,16 @@
     "pages/personal/yj/yj",
     "pages/personal/fp/fp",
     "pages/personal/sfrz/sfrz",
-    "pages/personal/cyrzr/cyrzr"
+    "pages/personal/cyrzr/cyrzr",
+    "pages/personal/cyrzr/tjrzr/tjrzr",
+    "pages/service/blrz/blrz",
+    "components/gongge/gongge"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "亿游网",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "selectedColor": "#F98941",

@@ -100,12 +100,12 @@ Page({
    * 跳转九宫格服务
    */
   navigateService: function(e) {
-    let index = e.currentTarget.dataset.index;
+    let index = e.detail.index;
 
     if (index == 6) {
       // 联系客服
       wx.makePhoneCall({
-        phoneNumber: '18207173275',
+        phoneNumber: '0719-8885855',
       })
     } else if (!this.data.routers[index].url) {
       wx.showToast({

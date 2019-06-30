@@ -1,1 +1,29 @@
 /* pages/personal/sfrz/sfrz.wxss */
+Page {
+  background-color: #f5f5f5;
+}
+.zjsc-box {
+  width: 90%;
+  height: 180px;
+  border: 1px solid #ea9518;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.zjsc-camera {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ea9518;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zjsc-camera-image {
+  width: 40px;
+  height: 40px;
+}

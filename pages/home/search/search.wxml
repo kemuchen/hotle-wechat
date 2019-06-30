@@ -18,18 +18,19 @@
   <view class="order-condition-item">06.27-06.28<view class="triangle-down"></view></view>
   <view class="order-condition-item">区域<view class="triangle-down"></view></view>
   <view class="order-condition-item">推荐排序<view class="triangle-down"></view></view>
-  <view class="order-condition-item">短租<view class="triangle-down"></view></view>
+  <view class="order-condition-item">门店选房<view class="triangle-down"></view></view>
+  <view class="order-condition-item">更多条件<view class="triangle-down"></view></view>
 </view>
 
 
 <!-- 房间列表 -->
 <view class="room-list">
   <!-- 左侧筛选条件 -->
-  <view class="room-list-left">
+  <!-- <view class="room-list-left">
     <view class="room-list-left-item">门店选房</view>
     <view class="room-list-left-item">房型筛选</view>
     <view class="room-list-left-item">更多条件</view>
-  </view>
+  </view> -->
 
   <!-- 右侧房间列表 -->
   <view class="room-lis-right" style="height: {{roomListHeight}}px;">

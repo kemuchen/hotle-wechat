@@ -1,2 +1,37 @@
 <!--pages/personal/sfrz/sfrz.wxml-->
-<text>pages/personal/sfrz/sfrz.wxml</text>
+<view class="container">
+  <!-- 证件上传 -->
+  <view class="panel-title">证件上传</view>
+  <view class="common-help">
+    请务必上传真实、有效的身份证实物照片
+  </view>
+  <view class="common-help" style="margin-top: 5px;">
+    仅用于公安部门审核，我们绝对不会泄露您的资料
+  </view>
+  <view class="zjsc-box">
+    <!-- 身份证正面 -->
+    <view class="zjsc-camera">
+      <image src="{{cameraImage}}" class="zjsc-camera-image"></image>
+    </view>
+  </view>
+  <view class="zjsc-box">
+    <!-- 身份证反面 -->
+    <view class="zjsc-camera">
+      <image src="{{cameraImage}}" class="zjsc-camera-image"></image>
+    </view>
+  </view>
+
+  <!-- 自拍照上传 -->
+  <view class="panel-title">自拍照上传</view>
+  <view class="common-help">
+    请上传真实自拍照的照片，用于身份证照片核验
+  </view>
+  <view class="zjsc-box">
+    <!-- 身份证反面 -->
+    <view class="zjsc-camera">
+      <image src="{{cameraImage}}" class="zjsc-camera-image"></image>
+    </view>
+  </view>
+</view>
+
+<button class="common-btn" style="margin-bottom: 20px;">提交</button>

@@ -38,7 +38,7 @@ page{
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   border-top: 6px solid #000;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .search-box-splid {
@@ -100,7 +100,7 @@ page{
 }
 
 .room-lis-right {
-  width: 75%;
+  width: 100%;
   background-color: #fff;
 }
 

@@ -1,2 +1,20 @@
 <!--pages/personal/cyrzr/cyrzr.wxml-->
-<text>pages/personal/cyrzr/cyrzr.wxml</text>
+<button class="common-btn-nofilling" bindtap="navigateToTjrzr">添加入住人</button>
+<view class="cyrzr-list-title">常用入住人</view>
+<!-- 常用入住人列表 -->
+<view class="ryrzr-list">
+  <view class="cyrzr-list-item">
+    <image src="" class="select-icon"></image>
+    <text class="cyrzr-list-item-text">张三 18207173275</text>
+  </view>
+  <view class="cyrzr-list-item">
+    <image src="" class="select-icon"></image>
+    <text class="cyrzr-list-item-text">张三 18207173275</text>
+  </view>
+  <view class="cyrzr-list-item">
+    <image src="" class="select-icon"></image>
+    <text class="cyrzr-list-item-text">张三 18207173275</text>
+  </view>
+</view>
+
+<button class="common-btn" style="position: absolute; bottom: 10px; left: 5%;">确定</button>

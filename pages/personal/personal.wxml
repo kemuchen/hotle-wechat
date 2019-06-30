@@ -25,7 +25,7 @@
       <view>
         <image src="{{cardImg}}" class="vip-info-item-image" />
       </view>
-      <view class="vip-info-item-title">领取品质卡</view>
+      <view class="vip-info-item-title">领取品智卡</view>
       <view class="vip-info-item-desc">联盟数0个</view>
     </view>
     <view class="vip-info-item">
@@ -81,15 +81,4 @@
 </view>
 
 <!-- 九宫格 -->
-<view class="weui-grid-box">
-  <view class="weui-grids">
-    <view class="weui-grid" wx:for="{{routers}}" wx:key="name">
-      <view class='weui-grid__bg' bindtap="navigateService" data-index='{{item.index}}'>
-        <view class="weui-grid__icon">
-          <image src="{{item.icon}}" mode="scaleToFill" />
-        </view>
-        <text class="weui-grid__label">{{item.name}}</text>
-      </view>
-    </view>
-  </view>
-</view>
+<gongge routers="{{routers}}" bindclickItem="navigateService"></gongge>

@@ -1,9 +1,9 @@
 /* pages/service/service.wxss */
 .no-room {
   width: 95%;
-  margin-left: 2.5%;
   background-color: #ea9518;
   padding-bottom: 30px;
+  margin-top: 10px;
 }
 
 .top-line {
@@ -41,13 +41,13 @@
   font-size: 35rpx;
   color: #fff;
   margin-left: 15px;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .advince-room {
   background-color: #e76e09;
   margin-left: 15px;
-  margin-top: 30px;
+  margin-top: 20px;
   width: 80px;
   height: 30px;
   color: #fff;
@@ -56,4 +56,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.znkm-box {
+  width: 95%;
+  margin-top: 10px;
+}
+
+.znkm-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.znkm-title-text {
+  font-size: 35rpx;
+  font-weight: bold;
+}
+
+.znkm-title-tips {
+  font-size: 25rpx;
+  margin-left: 10px;
 }
