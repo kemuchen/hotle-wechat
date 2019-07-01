@@ -68,4 +68,13 @@ Page({
       })
     }
   },
+
+  /**
+   * 跳转到房间详情界面
+   */
+  navigateToFjxq: function() {
+    wx.navigateTo({
+      url: '/pages/home/fjxq/fjxq',
+    })
+  }
 })

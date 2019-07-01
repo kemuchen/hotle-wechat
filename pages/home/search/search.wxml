@@ -35,7 +35,7 @@
   <!-- 右侧房间列表 -->
   <view class="room-lis-right" style="height: {{roomListHeight}}px;">
     <scroll-view class="tjfy-box" scroll-y>
-      <view class="tjfy-box-fy" wx:for="{{tjfyList}}">
+      <view class="tjfy-box-fy" wx:for="{{tjfyList}}" bindtap="navigateToFjxq">
         <!-- 房源图片 -->
         <view class="tjfy-box-fy-image"><image src="{{item.url}}" class="tjfy-box-fy-image"/></view>
         <!-- 房源描述 -->

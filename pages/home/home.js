@@ -132,5 +132,14 @@ Page({
     this.setData({
       currentRzlx: e.currentTarget.dataset.rzlx
     });
+  },
+
+  /**
+   * 跳转到房间详情界面
+   */
+  navigateToFjxq: function () {
+    wx.navigateTo({
+      url: '/pages/home/fjxq/fjxq',
+    })
   }
 })

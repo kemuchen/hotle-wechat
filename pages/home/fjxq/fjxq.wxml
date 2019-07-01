@@ -1,0 +1,161 @@
+<!--pages/home/fjxq/fjxq.wxml-->
+<view class="swiperContainer">
+  <!-- 房间图片展示 -->
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" bindchange="swiperChange">
+    <block wx:for="{{imgArr}}">
+      <swiper-item>
+        <image src="{{item}}" bindtap="previewImg" data-index="{{index}}" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="imageCount">{{current}} / {{imgArr.length}}</view>
+  <image class="collect" src="{{isCollected ? collectedImage : collectImage}}" bindtap="collect"></image>
+</view>
+
+<!-- 房间详情介绍 -->
+<view class="container">
+  <view class="jdmc">梦幻珊瑚</view>
+  <view class="jdwz">
+    <image src="{{locationImage}}" class="location-icon"></image>
+    <view class="location-text">湖北省十堰市茅箭区朝阳南路四四长</view>
+    <view class="tencent-map-icon-box" bindtap="openTencentMap">
+      <image src="{{mapImage}}" class="tencent-map-icon"></image>
+    </view>
+  </view>
+</view>
+<tab tabList="{{tabList}}" bindswichNav="swichNav"></tab>
+<!-- 房间介绍 -->
+<view class="tab-container" hidden="{{currentTab != 1}}">
+  <view class="ssjs-box">
+    <view class="ssjs-item">
+      <image src="{{yzrsIcon}}" class="ssjs-item-icon"></image>
+      <view class="ssjs-item-desc">宜住2人</view>
+    </view>
+    <view class="ssjs-item">
+      <image src="{{bedIcon}}" class="ssjs-item-icon"></image>
+      <view class="ssjs-item-desc">1张床</view>
+    </view>
+    <view class="ssjs-item">
+      <image src="{{sizeIcon}}" class="ssjs-item-icon"></image>
+      <view class="ssjs-item-desc">35m
+        <sup>2</sup>
+      </view>
+    </view>
+    <view class="ssjs-item">
+      <image src="{{doorIcon}}" class="ssjs-item-icon"></image>
+      <view class="ssjs-item-desc">1厅1室1卫</view>
+    </view>
+  </view>
+  <view class="fxjs-box">
+    <view class="fxjs-item">
+      <text class="fxjs-item-label">房屋结构：</text>
+      <text class="fxjs-item-text">标准平层</text>
+    </view>
+    <view class="fxjs-item">
+      <text class="fxjs-item-label">装修风格：</text>
+      <text class="fxjs-item-text">简欧风格</text>
+    </view>
+    <view class="fxjs-item">
+      <text class="fxjs-item-label">床型：</text>
+      <text class="fxjs-item-text">1.8米*2米</text>
+    </view>
+    <view class="fxjs-item">
+      <text class="fxjs-item-label">楼层：</text>
+      <text class="fxjs-item-text">3楼</text>
+    </view>
+    <view class="fxjs-item">
+      <text class="fxjs-item-label">外宾：</text>
+      <text class="fxjs-item-text">不接待外宾</text>
+    </view>
+  </view>
+
+  <view class="ssjs-box" style="margin-top: 25px;">
+    <view class="fyjs-title" style="margin-bottom: 10px;">设施服务</view>
+    <view class="ssjs-item" wx:for="{{fjssList}}">
+      <image src="{{item.icon}}" class="ssjs-item-icon"></image>
+      <view class="ssjs-item-desc">{{item.name}}</view>
+    </view>
+  </view>
+
+  <!-- 房源介绍 -->
+  <view class="fxjs-box">
+    <view class="fyjs-title">房源介绍</view>
+    <view class="fxjs-item-text" style="margin-top: 10px;">
+      小区位置，眼界开阔，空气清新。楼下有农业、建设、工商、中行、邮政等多家银行，24保安值班，有停车场，安全、环境方面自然没得说，附近就是商业街、麦当劳、超市、农贸市场，离公交、超市很近。非常适合在附近上班的人。
+    </view>
+  </view>
+
+  <!-- 入住须知 -->
+  <view class="fxjs-box" style="margin-bottom: 60px;">
+    <view class="fyjs-title">入住须知</view>
+    <view class="fxjs-item-text" style="margin-top: 10px;">
+      入住时间：最早14:00，且不早于订单开始时间
+    </view>
+    <view class="fxjs-item-text" style="margin-top: 10px;">
+      退房时间：最晚14:00，且且不晚于订单结束时间
+    </view>
+    <view class="fxjs-item-text" style="margin-top: 10px;">
+      入住规则：预定成功后，查看小程序订单详情，办理入住
+    </view>
+  </view>
+</view>
+<!-- 房间评价 -->
+<view class="tab-container" hidden="{{currentTab != 2}}">
+  <view class="fjpj-fjpf">
+    <view class="fjpj-fjpf-zhpf">
+      <view class="fjpj-fjpf-zhpf-fs">5.0</view>
+      <view class="fjpj-fjpf-zhpf-pjrs">(29条评价)</view>
+    </view>
+    <view class="fjpj-fjpf-xjpf">
+      <view class="fjpj-fjpf-xjpf-item" wx:for="{{pfList}}">
+        <view class="fjpj-fjpf-xjpf-item-title">{{item.name}}</view>
+        <view class="fjpj-fjpf-xjpf-item-xjsl">
+          <image src="{{item.score >= 1 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 2 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 3 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 4 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 5 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+        </view>
+        <view class="fjpj-fjpf-xjpf-item-fs">{{item.score}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 用户评价 -->
+  <view class="yhpj-box">
+    <view class="yhpj-title">共有29条评价</view>
+    <view class="yhpj-item" wx:for="{{yhpjList}}">
+      <view class="yhpj-yhxx-box">
+        <view class="yhpj-yhxx">
+          <image src="{{item.avator}}" class="yhpj-yhxx-avator"></image>
+          <view class="yhpj-yhxx-info">
+            <view class="yhpj-yhxx-info-name">{{item.username}}</view>
+            <view class="yhpj-yhxx-info-score">
+              <image src="{{item.score >= 1 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 2 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 3 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 4 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+          <image src="{{item.score >= 5 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
+            <text style="font-size: 20rpx; margin-left: 5px;">{{item.score}}分</text>
+            </view>
+          </view>
+        </view>
+        <view class="yhpj-pjsj">{{item.pjsj}}</view>
+      </view>
+      <view class="yhpj-pjnr">{{item.pjnr}}</view>
+    </view>
+  </view>
+</view>
+<!-- 附近房源 -->
+<view class="fjpj-box" hidden="{{currentTab != 3}}">
+  <view class="fjpj-score">
+  附近房源
+  </view>
+</view>
+<!-- 立即预定 -->
+<view class="order-box">
+  <view class="price">
+    <text style="font-size: 40rpx; font-weight: bold">￥208.00</text>
+    <text style="font-size: 30rpx;">起/晚</text>
+  </view>
+  <button class="button-btn">立即预定</button>
+</view>

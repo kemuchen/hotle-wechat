@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/service/service",
     "pages/home/home",
     "pages/order/order",
+    "pages/service/service",
     "pages/personal/personal",
     "pages/home/search/search",
     "pages/personal/money/money",
@@ -13,7 +13,9 @@
     "pages/personal/cyrzr/cyrzr",
     "pages/personal/cyrzr/tjrzr/tjrzr",
     "pages/service/blrz/blrz",
-    "components/gongge/gongge"
+    "components/gongge/gongge",
+    "pages/home/fjxq/fjxq",
+    "pages/home/fjyd/fjyd"
   ],
   "window": {
     "backgroundTextStyle": "light",
