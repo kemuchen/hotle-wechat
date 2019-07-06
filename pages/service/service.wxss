@@ -48,7 +48,7 @@
   background-color: #e76e09;
   margin-left: 15px;
   margin-top: 20px;
-  width: 80px;
+  width: 100px;
   height: 30px;
   color: #fff;
   font-size: 30rpx;

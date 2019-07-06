@@ -46,11 +46,12 @@ Page({
       },
       {
         name: '办理续住',
-        url: '/pages/personal/cyrzr/cyrzr',
+        url: '/pages/home/fjyd/fjyd',
         icon: '/resources/images/service/blxz.png',
         index: '3'
       },
       {
+        url: '/pages/service/sqqj/sqqj',
         name: '清洁服务',
         icon: '/resources/images/service/qjfw.png',
         index: '4'
@@ -126,6 +127,10 @@ Page({
       wx.showToast({
         title: '邀请入住',
         icon: 'none'
+      })
+    } else if (this.data.zzfwRouters[index].url) {
+      wx.navigateTo({
+        url: this.data.zzfwRouters[index].url,
       })
     }
   }

@@ -4,7 +4,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
+  data: { 
     imgArr: [
       'http://bpic.588ku.com/element_origin_min_pic/16/10/30/528aa13209e86d5d9839890967a6b9c1.jpg',
       'http://bpic.588ku.com/element_origin_min_pic/16/10/30/54fcef525fa8f6037d180f3c26f3be65.jpg',
@@ -30,10 +30,10 @@ Page({
     isCollected: false,
     tabList: [{
       index: 1,
-      name: '房间介绍'
+      name: '酒店预定'
     }, {
       index: 2,
-      name: '房间评价'
+      name: '住客评价'
     }, {
       index: 3,
       name: '附近房源'
@@ -97,7 +97,78 @@ Page({
         pjsj: '2019-01-28 14:58:01',
         pjnr: '一般般'
       },
-    ]
+    ],
+    fjfyList: [
+      {
+        url: '/resources/images/1.jpg',
+        fyxj: '三星级',
+        fypf: 3.0,
+        fymc: '精致大床房',
+        fyjg: 188
+      }, {
+        url: '/resources/images/2.jpg',
+        fyxj: '四星级',
+        fypf: 5.0,
+        fymc: '豪华大床房',
+        fyjg: 256
+      }, {
+        url: '/resources/images/3.jpg',
+        fyxj: '四星级',
+        fypf: 4.0,
+        fymc: '双人房',
+        fyjg: 220
+      }, {
+        url: '/resources/images/4.jpg',
+        fyxj: '三星级',
+        fypf: 5.0,
+        fymc: '精致大床房',
+        fyjg: 188
+      }
+    ],
+    fxList: [
+      {
+        image: '/resources/images/1.jpg',
+        fjlx: '商务标间',
+        sfhzc: '不含早',
+        fjmj: '35',
+        beds: '双床',
+        sfyc: '有窗',
+        price: '158'
+      }, {
+        image: '/resources/images/1.jpg',
+        fjlx: '商务标间',
+        sfhzc: '不含早',
+        fjmj: '35',
+        beds: '双床',
+        sfyc: '有窗',
+        price: '158'
+      }, {
+        image: '/resources/images/1.jpg',
+        fjlx: '商务标间',
+        sfhzc: '不含早',
+        fjmj: '35',
+        beds: '双床',
+        sfyc: '有窗',
+        price: '158'
+      }, {
+        image: '/resources/images/1.jpg',
+        fjlx: '商务标间',
+        sfhzc: '不含早',
+        fjmj: '35',
+        beds: '双床',
+        sfyc: '有窗',
+        price: '158'
+      }, {
+        image: '/resources/images/1.jpg',
+        fjlx: '商务标间',
+        sfhzc: '不含早',
+        fjmj: '35',
+        beds: '双床',
+        sfyc: '有窗',
+        price: '158'
+      }
+    ],
+    showModal: false
   },
 
   /**
@@ -163,6 +234,33 @@ Page({
       latitude,
       longitude,
       scale: 18
+    })
+  },
+  
+  /**
+   * 跳转到房间详情界面
+   */
+  navigateToFjxq: function() {
+    wx.navigateTo({
+      url: '/pages/home/fjxq/fjxq',
+    })
+  },
+
+  /**
+   * 查看房间信息
+   */
+  ckfjxx: function() {
+    this.setData({
+      showModal: true
+    });
+  },
+
+  /**
+   * 跳转到房间预定界面
+   */
+  navigateToFjyd: function() {
+    wx.navigateTo({
+      url: '/pages/home/fjyd/fjyd',
     })
   }
 })

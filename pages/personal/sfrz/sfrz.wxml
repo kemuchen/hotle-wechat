@@ -1,5 +1,5 @@
 <!--pages/personal/sfrz/sfrz.wxml-->
-<view class="container">
+<view class="container" style="background-color: #fff;">
   <!-- 证件上传 -->
   <view class="panel-title">证件上传</view>
   <view class="common-help">

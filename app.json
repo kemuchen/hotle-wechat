@@ -13,9 +13,11 @@
     "pages/personal/cyrzr/cyrzr",
     "pages/personal/cyrzr/tjrzr/tjrzr",
     "pages/service/blrz/blrz",
-    "components/gongge/gongge",
+    "pages/home/fjyd/fjyd",
     "pages/home/fjxq/fjxq",
-    "pages/home/fjyd/fjyd"
+    "pages/order/orderinfo/orderinfo",
+    "pages/service/sqqj/sqqj",
+    "pages/service/czmm/czmm"
   ],
   "window": {
     "backgroundTextStyle": "light",

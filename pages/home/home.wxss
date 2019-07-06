@@ -27,7 +27,7 @@
   margin-left: 5%;
   flex-direction: row;
   justify-content: center;
-  border-bottom: 1px solid #C2B6AE;
+  border-bottom: 1px solid #d9d9d9;
   align-items: center;
 }
 
@@ -58,7 +58,7 @@
   margin-left: 5%;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid #C2B6AE;
+  border-bottom: 1px solid #d9d9d9;
   align-items: center;
   font-size: 32rpx;
 }
@@ -110,19 +110,8 @@
   color: #000;
 }
 
-.calendar-box {
-  position: absolute;
-  bottom: 0px;
-  z-index: 1000;
-  background:rgba(0,0,0,0.5);
-  height: 100%;
-  width: 100%;
-}
-
 .calendar {
-  position: absolute;
   background-color: #ffffff;
-  bottom: 0px;
   width: 100%;
 }
 
@@ -132,11 +121,10 @@
   height: 40px;
   padding-left: 10px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #C2B6AE;
+  border-bottom: 1px solid #d9d9d9;
   font-size: 30rpx;
   align-items: center;
 }
-
 .tjfy-box-title {
   margin-top: 20px;
   width: 90%;
@@ -200,12 +188,12 @@
   margin-top: 20px;
   margin-left: 25%;
   margin-bottom: 20px;
-  border: 1px solid #ADADAD;
+  border: 1px solid #d9d9d9;
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
   border-bottom-right-radius: 7px;
   border-top-right-radius: 7px;
-  color: #707070;
+  color: #d9d9d9;
   font-size: 20rpx;
   display: flex;
   justify-content: center;

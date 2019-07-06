@@ -38,7 +38,7 @@ Page({
     calendarImage: '/resources/images/home/calendar.png',
     searchBtnImage: '/resources/images/home/search_w.png',
     rightArrowImage: '/resources/images/right-arr.png',
-    isHidden: true,
+    showModal: false,
     rzsj: '6月27',
     ldsj: '6月28',
     rzts: '一天',
@@ -69,7 +69,8 @@ Page({
         fyjg: 188
       }
     ],
-    currentRzlx: 1
+    currentRzlx: 1,
+    clickMaskClose: false
   },
 
   /**
@@ -84,7 +85,7 @@ Page({
    */
   selectRzsj: function() {
     this.setData({
-      isHidden: false
+      showModal: true
     })
   },
 
@@ -93,7 +94,7 @@ Page({
    */
   unSelectRzsj: function() {
     this.setData({
-      isHidden: true
+      showModal: false
     })
   },
 
@@ -104,7 +105,7 @@ Page({
     let rzts = util.dateUtil.dateDiff(this.formaDate(dateEnd), this.formaDate(dateStart));
     console.log(rzts);
     this.setData({
-      isHidden: true,
+      showModal: false,
       rzsj: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
       ldsj: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
       rzts: util.dateUtil.convertToChinaNum(rzts) + '天'
@@ -140,6 +141,15 @@ Page({
   navigateToFjxq: function () {
     wx.navigateTo({
       url: '/pages/home/fjxq/fjxq',
+    })
+  },
+
+  /**
+   * 联系客服
+   */
+  makePhoneCall: function() {
+    wx.makePhoneCall({
+      phoneNumber: '0719-8885855',
     })
   }
 })

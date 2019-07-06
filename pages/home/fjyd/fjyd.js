@@ -1,11 +1,21 @@
 // pages/home/fjyd/fjyd.js
+const util = require('../../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    showModal: false,
+    clickMaskClose: false,
+    calendarImage: '/resources/images/home/calendar.png',
+    wjxIcon: '/resources/images/wjx.png',
+    wjxFillingIcon: '/resources/images/wjx_filling.png',
+    zffsRadio: [
+      { name: '1', value: '钱包支付' },
+      { name: '2', value: '微信支付' }
+    ],
+    ydfjs: 1
   },
 
   /**
@@ -16,51 +26,48 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 用户选择入住时间
    */
-  onReady: function () {
-
+  selectRzsj: function () {
+    this.setData({
+      showModal: true
+    })
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * 取消选择日期
    */
-  onShow: function () {
+  unSelectRzsj: function() {
+    this.setData({
+      showModal: false
+    })
+  },
 
+  // 处理日期选择事件
+  handleSelectDate(e) {
+    let dateStart = e.detail.dateStart;
+    let dateEnd = e.detail.dateEnd;
+    let rzts = util.dateUtil.dateDiff(this.formaDate(dateEnd), this.formaDate(dateStart));
+    console.log(rzts);
+    this.setData({
+      showModal: false,
+      rzsj: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
+      ldsj: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
+      rzts: util.dateUtil.convertToChinaNum(rzts) + '天'
+    })
+  },
+
+  // 格式化日期
+  formaDate: function (date) {
+    return util.dateUtil.formatNum(date.year) + '-' + util.dateUtil.formatNum(date.month) + '-' + util.dateUtil.formatNum(date.day)
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
+   * 房间数减
    */
-  onHide: function () {
-
+  bindFjslChange: function(e) {
+    this.setData({
+      ydfjs: e.detail.num
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

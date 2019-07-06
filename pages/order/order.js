@@ -27,6 +27,33 @@ Page({
         index: 6,
         name: '待评价'
       }
+    ],
+    orderList: [
+      {
+        fjmc: '精致大床房',
+        ddzt: '已取消',
+        rzsj: '06/27',
+        ldsj: '06/28',
+        lc: '17',
+        fjh: '1729',
+        sfje: '0.00'
+      }, {
+        fjmc: '精致大床房',
+        ddzt: '已取消',
+        rzsj: '06/27',
+        ldsj: '06/28',
+        lc: '17',
+        fjh: '1729',
+        sfje: '0.00'
+      }, {
+        fjmc: '精致大床房',
+        ddzt: '已取消',
+        rzsj: '06/27',
+        ldsj: '06/28',
+        lc: '17',
+        fjh: '1729',
+        sfje: '0.00'
+      }
     ]
   },
 
@@ -42,5 +69,23 @@ Page({
    */
   swichNav: function(e) {
     console.log(e.detail.currentTab);
+  },
+
+  /**
+   * 跳转到订单详情界面
+   */
+  navigateToOrderInfo: function() {
+    wx.navigateTo({
+      url: '/pages/order/orderinfo/orderinfo',
+    })
+  },
+
+  /**
+   * 跳转到预定界面
+   */
+  navigateToOrder: function() {
+    wx.navigateTo({
+      url: '/pages/home/fjyd/fjyd',
+    })
   }
 })

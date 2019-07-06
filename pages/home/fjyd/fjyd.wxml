@@ -1,2 +1,125 @@
 <!--pages/home/fjyd/fjyd.wxml-->
-<text>pages/home/fjyd/fjyd.wxml</text>
+<!-- 立即预定 -->
+<view class="order-box">
+  <view class="price">
+    <text style="font-size: 40rpx; font-weight: bold">￥208.00</text>
+    <text style="font-size: 30rpx;">起/晚</text>
+  </view>
+  <button class="button-btn">提交订单</button>
+</view>
+
+<view class="container" style="margin-bottom: 60px;">
+  <!-- 房间信息 -->
+  <view class="fjxx-box">
+    <image src="/resources/images/1.jpg" class="fjxx-image"></image>
+    <view class="fjxx-info">
+      <view class="fjxx-info-fjmc">智慧公寓十堰店-新青年智能标间</view>
+      <view class="fjxx-info-fjdz">十堰市茅箭区某某路1203号</view>
+      <view class="fjxx-info-score">
+        <image src="{{item.score >= 1 ? wjxFillingIcon : wjxIcon}}" class="fjxx-info-icon"></image>
+        <image src="{{item.score >= 2 ? wjxFillingIcon : wjxIcon}}" class="fjxx-info-icon"></image>
+        <image src="{{item.score >= 3 ? wjxFillingIcon : wjxIcon}}" class="fjxx-info-icon"></image>
+        <image src="{{item.score >= 4 ? wjxFillingIcon : wjxIcon}}" class="fjxx-info-icon"></image>
+        <image src="{{item.score >= 5 ? wjxFillingIcon : wjxIcon}}" class="fjxx-info-icon"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 入住时间 -->
+  <view class="search-rzsj">
+    <!-- 入住 -->
+    <view bindtap="selectRzsj" class="search-rzsj-item-sj">
+      <view class="search-rzsj-item-rz">入住</view>
+      <view class="search-rzsj-item-rq">
+        <image src="{{calendarImage}}" class="search-item-icon" />{{rzsj}}</view>
+      <view class="search-rzsj-item-week">星期四 14:00</view>
+    </view>
+    <!-- 天数 -->
+    <view class="search-rzsj-item-ts">
+      <view class="search-rzsj-item-rz">|</view>
+      <view class="search-rzsj-item-rq">
+        {{rzts}}
+      </view>
+      <view class="search-rzsj-item-week">|</view>
+    </view>
+    <!-- 离店 -->
+    <view bindtap="selectRzsj" class="search-rzsj-item-sj">
+      <view class="search-rzsj-item-rz">离店</view>
+      <view class="search-rzsj-item-rq">
+        <image src="{{calendarImage}}" class="search-item-icon" />{{ldsj}}</view>
+      <view class="search-rzsj-item-week">星期四 14:00</view>
+    </view>
+  </view>
+  <!-- 入住信息 -->
+  <view class="rzxx-box">
+    <view class="input-list-item">
+      <view class="input-list-item-title">
+        <image src="/resources/images/home/order-home.png" class="input-title-icon"></image>
+        <text class="input-title">房间数</text>
+      </view>
+      <view style="margin-right: 10px;">
+        <minu num="{{ydfjs}}" bindMinus="bindFjslChange" bindManual="bindFjslChange" bindPlus="bindFjslChange"></minu>
+      </view>
+    </view>
+    <view class="input-list-item">
+      <view class="input-list-item-title">
+        <image src="/resources/images/home/order-user.png" class="input-title-icon"></image>
+        <text class="input-title">入住人</text>
+      </view>
+      <input class="input-box" placeholder="入住人姓名" type="text"></input>
+    </view>
+    <view class="input-list-item">
+      <view class="input-list-item-title">
+        <image src="/resources/images/home/order-telephone.png" class="input-title-icon"></image>
+        <text class="input-title">手机号</text>
+      </view>
+      <input class="input-box" placeholder="输入真实手机号" type="text"></input>
+    </view>
+    <view class="input-list-item">
+      <view class="input-list-item-title">
+        <image src="/resources/images/home/order-pay.png" class="input-title-icon"></image>
+        <text class="input-title">支付方式</text>
+      </view>
+      <view class="input-box">
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{zffsRadio}}">
+            <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class="input-list-item" style="margin-top: 10px;">
+      <view class="input-list-item-title">
+        <image src="/resources/images/home/order-money.png" class="input-title-icon"></image>
+        <text class="input-title">钱包余额</text>
+      </view>
+      <text class="input-box">￥0.00</text>
+    </view>
+    <view class="input-list-item" style="margin-top: 10px;">
+      <text class="input-title" style="font-size: 25rpx; width: 60%;">2019-07-06 至 2019-06-07</text>
+      <text class="input-box">￥596.00</text>
+    </view>
+    <view class="input-list-item" style="margin-top: 10px;">
+      <text class="input-title">订单总额</text>
+      <text class="input-box">￥596.00</text>
+    </view>
+    <view class="input-list-item" style="margin-top: 10px;">
+      <text class="input-title">备注</text>
+      <input class="input-box" placeholder="请输入您的特需物品或服务" type="text"></input>
+    </view>
+  </view>
+  <!-- 提示信息 -->
+  <view class="common-help">尊敬的客人，入住前请实名认证和提交押金，谢谢您的配合！</view>
+  <!-- 同意协议 -->
+  <view class="tyxy">
+    <checkbox>本人已获悉并同意《租赁协议》</checkbox>
+  </view>
+</view>
+
+<!-- 日历组件 -->
+<modalView show="{{showModal}}" clickMaskClose="{{clickMaskClose}}">
+  <view class="calendar">
+    <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
+    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" />
+  </view>
+</modalView>

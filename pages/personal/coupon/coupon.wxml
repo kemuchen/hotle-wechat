@@ -2,7 +2,7 @@
 <tab tabList="{{tabList}}" bindswichNav="swichNav"></tab>
 
 <!-- 优惠券列表 -->
-<view class="container">
+<view class="container" style="background-color: #fff;">
   <view class="no-coupon" wx:if="{{couponList.length == 0}}">
     您暂未可使用的优惠券~
   </view>

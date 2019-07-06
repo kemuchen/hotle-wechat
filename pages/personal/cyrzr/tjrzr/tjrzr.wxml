@@ -1,5 +1,5 @@
 <!--pages/personal/cyrzr/tjrzr/tjrzr.wxml-->
-<view class="container">
+<view class="container" style="background-color: #fff;">
   <view class="input-list">
     <view class="input-list-item">
       <text class="input-title">姓名</text>
