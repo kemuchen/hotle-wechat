@@ -2,13 +2,10 @@
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">
   <block wx:for="{{ImageList}}">
     <swiper-item>
-      <navigator url="{{item.link}}">
-        <image src="{{item.url}}" class="slide-image" />
-      </navigator>
+      <image src="{{item.url}}" class="slide-image" bindtap="redirectTo" data-link="{{item.link}}" />
     </swiper-item>
   </block>
 </swiper>
-
 <!-- 房源查询 -->
 <view class="search">
   <!-- 入住类型 -->
@@ -104,7 +101,7 @@
 <!-- 日历组件 -->
 <modalView show="{{showModal}}" clickMaskClose="{{clickMaskClose}}">
   <view class="calendar">
-      <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
-      <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" />
-    </view>
+    <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
+    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" />
+  </view>
 </modalView>

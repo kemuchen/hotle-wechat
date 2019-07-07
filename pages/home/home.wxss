@@ -2,14 +2,15 @@
 /* 轮播图片样式 */
 .slide-image {
   width: 100%;
-  height: 300rpx;
+  height: 200px;
   z-index: 1;
+
 }
 
 /* 搜索条件 */
 .search {
   background-color: #ffffff;
-  margin-top: -50px;
+  margin-top: -30px;
   width: 90%;
   margin-left: 5%;
   height: 250px;

@@ -8,22 +8,22 @@ Page({
    */
   data: {
     ImageList: [{
-      link: '/pages/index/index',
+      link: 'http://www.baidu.com',
       url: '/resources/images/1.jpg'
     }, {
-      link: '/pages/index/index',
+      link: 'https://www.qq.com',
       url: '/resources/images/2.jpg'
     }, {
-      link: '/pages/index/index',
+      link: 'https://www.alibaba.com',
       url: '/resources/images/3.jpg'
     }, {
-      link: '/pages/index/index',
+      link: 'https://www.sina.com.cn',
       url: '/resources/images/4.jpg'
     }, {
-      link: '/pages/index/index',
+      link: 'https://www.meituan.com',
       url: '/resources/images/5.jpg'
     }, {
-      link: '/pages/index/index',
+      link: 'https://www.jd.com',
       url: '/resources/images/6.jpg'
     }],
     indicatorDots: false, //小点
@@ -42,33 +42,31 @@ Page({
     rzsj: '6月27',
     ldsj: '6月28',
     rzts: '一天',
-    tjfyList: [
-      {
-        url: '/resources/images/1.jpg',
-        fyxj: '三星级',
-        fypf: 3.0,
-        fymc: '精致大床房',
-        fyjg: 188
-      }, {
-        url: '/resources/images/2.jpg',
-        fyxj: '四星级',
-        fypf: 5.0,
-        fymc: '豪华大床房',
-        fyjg: 256
-      }, {
-        url: '/resources/images/3.jpg',
-        fyxj: '四星级',
-        fypf: 4.0,
-        fymc: '双人房',
-        fyjg: 220
-      }, {
-        url: '/resources/images/4.jpg',
-        fyxj: '三星级',
-        fypf: 5.0,
-        fymc: '精致大床房',
-        fyjg: 188
-      }
-    ],
+    tjfyList: [{
+      url: '/resources/images/1.jpg',
+      fyxj: '三星级',
+      fypf: 3.0,
+      fymc: '精致大床房',
+      fyjg: 188
+    }, {
+      url: '/resources/images/2.jpg',
+      fyxj: '四星级',
+      fypf: 5.0,
+      fymc: '豪华大床房',
+      fyjg: 256
+    }, {
+      url: '/resources/images/3.jpg',
+      fyxj: '四星级',
+      fypf: 4.0,
+      fymc: '双人房',
+      fyjg: 220
+    }, {
+      url: '/resources/images/4.jpg',
+      fyxj: '三星级',
+      fypf: 5.0,
+      fymc: '精致大床房',
+      fyjg: 188
+    }],
     currentRzlx: 1,
     clickMaskClose: false
   },
@@ -138,7 +136,7 @@ Page({
   /**
    * 跳转到房间详情界面
    */
-  navigateToFjxq: function () {
+  navigateToFjxq: function() {
     wx.navigateTo({
       url: '/pages/home/fjxq/fjxq',
     })
@@ -151,5 +149,17 @@ Page({
     wx.makePhoneCall({
       phoneNumber: '0719-8885855',
     })
+  },
+
+  /**
+   * 跳转链接
+   */
+  redirectTo: function(e) {
+    let link = e.currentTarget.dataset.link;
+    if (link) {
+      wx.navigateTo({
+        url: '/pages/home/webview/webview?link=' + link,
+      })
+    }
   }
 })
