@@ -2,7 +2,7 @@
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">
   <block wx:for="{{ImageList}}">
     <swiper-item>
-      <image src="{{item.url}}" class="slide-image" bindtap="redirectTo" data-link="{{item.link}}" />
+      <image src="{{item.imageurl}}" class="slide-image" bindtap="redirectTo" data-link="{{item.link}}" />
     </swiper-item>
   </block>
 </swiper>

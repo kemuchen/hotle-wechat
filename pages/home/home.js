@@ -1,4 +1,6 @@
 const util = require('../../utils/util.js')
+const request = require('../../utils/request.js')
+var app = getApp();
 
 // pages/home/home.wxml.js
 Page({
@@ -7,25 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ImageList: [{
-      link: 'http://www.baidu.com',
-      url: '/resources/images/1.jpg'
-    }, {
-      link: 'https://www.qq.com',
-      url: '/resources/images/2.jpg'
-    }, {
-      link: 'https://www.alibaba.com',
-      url: '/resources/images/3.jpg'
-    }, {
-      link: 'https://www.sina.com.cn',
-      url: '/resources/images/4.jpg'
-    }, {
-      link: 'https://www.meituan.com',
-      url: '/resources/images/5.jpg'
-    }, {
-      link: 'https://www.jd.com',
-      url: '/resources/images/6.jpg'
-    }],
+    ImageList: [],
     indicatorDots: false, //小点
     autoplay: true, //是否自动轮播
     interval: 3000, //间隔时间
@@ -75,7 +59,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.loadImages();
+    wx.requestPayment(
+      {
+        'timeStamp': '',
+        'nonceStr': '',
+        'package': '',
+        'signType': 'MD5',
+        'paySign': '',
+        'success': function (res) { 
+          console.log("success" + res);
+        },
+        'fail': function (res) {"fail" + console.log(res);},
+        'complete': function (res) {"complete" + console.log(res);}
+      }) 
   },
 
   /**
@@ -161,5 +158,33 @@ Page({
         url: '/pages/home/webview/webview?link=' + link,
       })
     }
+  },
+
+  /**
+   * 加载轮播图片列表
+   */
+  loadImages: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'getHomeLinks',
+      body: {
+        sfxs: '1',
+        xssjq: util.dateUtil.format(new Date(), 'Y-M-D H:F:S'),
+        xssjz: util.dateUtil.format(new Date(), 'Y-M-D H:F:S')
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function(data){
+        that.setData({
+          ImageList: data
+        })
+      },
+      function(data) {
+        wx.showToast({
+          title: '请求错误',
+        })
+      }
+    )
   }
 })

@@ -7,12 +7,12 @@
  *    responseType: 返回数据类型
  */
 var doRequest=function(param, successFun, failFun) {
-  if (param.url) {
+  if (!param.url) {
     console.error("请传入请求地址")
     return;
   }
 
-  if (param.body) {
+  if (!param.body) {
     console.error("请传入请求参数")
     return;
   }
@@ -23,23 +23,26 @@ var doRequest=function(param, successFun, failFun) {
     method: param.method ? param.method : 'GET',
     dataType: "json",
     success: function(res) {
-      if (!res) {
+      if (!res.data) {
         wx.showToast({
           title: '请求错误',
+          icon: 'none'
         })
       } else {
-        if (res.code != '1') {
+        if (res.data.code != '1') {
           wx.showToast({
-            title: res.msg,
+            title: res.data.message,
+            icon: 'none'
           })
         } else {
-          successFun(res.response);
+          successFun(res.data.data);
         }
       }
     },
     fail(res) {
       wx.showToast({
         title: '请求错误',
+        icon: 'none',
         success:  function(res) {
           failFun(res);
         }
