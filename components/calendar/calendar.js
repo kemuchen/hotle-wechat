@@ -71,7 +71,7 @@ Component({
      */
     startDate: {
       type: String,
-      value: '1900-01',
+      value: '1900-01-01',
       observer: '_setStartDate'
     },
 
@@ -207,8 +207,10 @@ Component({
     weekTitle: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     max_year: 2099, // 最大年份
     max_month: 12, // 最大月份
+    max_day: 31,
     min_year: 1900, // 最小年份
     min_month: 1, // 最小月份
+    min_day: 1,  // 最小日期
     moreDays: false
   },
 
@@ -292,20 +294,24 @@ Component({
      * 设置起始日期
      */
     _setStartDate: function(newDate, oldDate) {
-      if (newDate.length == 7 && newDate.indexOf('-') == 4) {
+      console.log(111)
+      if (newDate.length <= 10 && newDate.indexOf('-') == 4) {
         const year = parseInt(newDate.split('-')[0]);
         const month = parseInt(newDate.split('-')[1]);
+        const day = parseInt(newDate.split('-')[2]);
         if (!isNaN(year) && year >= minYear && !isNaN(month) && month >= 1 && month <= 12) {
           this.setData({
             startDate: newDate,
             min_year: year,
-            min_month: month
+            min_month: month,
+            min_day: day
           });
+          this._setCalendarData();
         } else {
-          throw new Error('起始日期必须是YYYY-MM格式，且大于等于1900-01');
+          throw new Error('起始日期必须是YYYY-MM-DD格式，且大于等于1900-01-01');
         }
       } else {
-        throw new Error('起始日期必须是YYYY-MM格式');
+        throw new Error('起始日期必须是YYYY-MM-DD格式');
       }
     },
 
@@ -313,14 +319,16 @@ Component({
      * 设置结束日期
      */
     _setEndDate: function(newDate, oldDate) {
-      if (newDate.length == 7 && newDate.indexOf('-') == 4) {
+      if (newDate.length <= 10 && newDate.indexOf('-') == 4) {
         const year = parseInt(newDate.split('-')[0]);
         const month = parseInt(newDate.split('-')[1]);
+        const day = parseInt(newDate.split('-')[2]);
         if (!isNaN(year) && year <= 2099 && !isNaN(month) && month >= 1 && month <= 12) {
           this.setData({
             endDate: newDate,
             max_year: year,
-            max_month: month
+            max_month: month,
+            max_day: day
           });
         } else {
           throw new Error('结束日期必须是YYYY-MM格式，且小于等于2099-12');
@@ -564,6 +572,20 @@ Component({
         }
       }
 
+      // 设置起止日期
+      for (let i = 0; i < days.length; i++) {
+        if (days[i].year < this.data.min_year || 
+        (days[i].year == this.data.min_year && days[i].month < this.data.min_month) ||
+          (days[i].year == this.data.min_year && days[i].month == this.data.min_month && days[i].day < this.data.min_day)) {
+          days[i].color = '#c3c6d1';
+        }
+        if (days[i].year > this.data.max_year ||
+          (days[i].year == this.data.max_year && days[i].month > this.data.max_month) ||
+          (days[i].year == this.data.max_year && days[i].month == this.data.max_month && days[i].day > this.data.max_day)) {
+          days[i].color = '#c3c6d1';
+        }
+      }
+
       let days_array = new Array;
       let week = new Array;
       for (let i = 0; i < days.length; i++) {
@@ -577,6 +599,7 @@ Component({
       if (week.length > 0) {
         days_array.push(week);
       }
+
       return days_array;
     },
 
@@ -710,6 +733,18 @@ Component({
     dayClick: function(event) {
       const click_day = event.currentTarget.dataset.day;
 
+      // 判断选中日期是否在范围内
+      if (click_day.year < this.data.min_year ||
+        (click_day.year == this.data.min_year && click_day.month < this.data.min_month) ||
+        (click_day.year == this.data.min_year && click_day.month == this.data.min_month && click_day.day < this.data.min_day)) {
+        return;
+      }
+      if (click_day.year > this.data.max_year ||
+        (click_day.year == this.data.max_year && click_day.month > this.data.max_month) ||
+        (click_day.year == this.data.max_year && click_day.month == this.data.max_month && click_day.day > this.data.max_day)) {
+        return;
+      }
+
       // 选择单日期
       if (!this.data.moreDays) {
         this.triggerEvent('dayClick', click_day);
@@ -742,8 +777,8 @@ Component({
           
           // 当开始日期超过结束日期时，开始日期和结束日期对换
           if (dateStart.year > dateEnd.year || 
-            (dateStart.year == dateEnd.year && dateStart.month > dateEnd.month) || 
-            (dateStart.year == dateEnd.year && dateStart.month == dateStart.max_month && dateStart.day > dateEnd.day)) {
+            (dateStart.year == dateEnd.year && dateStart.month > dateEnd.month) ||
+            (dateStart.year == dateEnd.year && dateStart.month == dateStart.month && dateStart.day > dateEnd.day)) {
             let temp = dateEnd;
             dateEnd = dateStart;
             dateStart = temp;

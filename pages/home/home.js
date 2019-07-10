@@ -165,7 +165,7 @@ Page({
     let that = this;
     request.doRequest(
       params,
-      function(data){
+      function(data) {
         that.setData({
           ImageList: data
         })
@@ -182,11 +182,13 @@ Page({
    * 定位
    */
   getLocation: function() {
+    var that = this;
     if (!app.globalData.user.address.address) {
-      app.getLocation();
+      app.getLocation(function() {
+        that.setData({
+          myLocation: app.globalData.user.address.address
+        })
+      });
     }
-    this.setData({
-      myLocation: app.globalData.user.address.address
-    })
   }
 })

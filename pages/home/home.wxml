@@ -37,7 +37,7 @@
     <view bindtap="selectRzsj" class="search-rzsj-item-sj">
       <view class="search-rzsj-item-rz">入住</view>
       <view class="search-rzsj-item-rq">
-        <image src="{{calendarImage}}" class="search-item-icon" />{{rzsj}}</view>
+        <image src="{{calendarImage}}" class="search-item-icon" />{{rzsj}}          </view>
       <view class="search-rzsj-item-week">星期四 14:00</view>
     </view>
     <!-- 天数 -->
@@ -53,10 +53,24 @@
     <view bindtap="selectRzsj" class="search-rzsj-item-sj">
       <view class="search-rzsj-item-rz">离店</view>
       <view class="search-rzsj-item-rq">
-        <image src="{{calendarImage}}" class="search-item-icon" />{{ldsj}}</view>
+        <image src="{{calendarImage}}" class="search-item-icon" />{{ldsj}}        </view>
       <view class="search-rzsj-item-week">星期四 14:00</view>
     </view>
   </view>
+
+  <!-- 时间开关 -->
+  <view class="time-switch" hidden="{{currentRzlx != 2}}">
+    <view class="time-switch-item">
+      <switch bindchange="switchChange" />
+      <view class="time-switch-item-desc">提前至20:00入住</view>
+    </view>
+    <view class="time-switch-item">
+      <switch bindchange="switchChange" />
+      <view class="time-switch-item-desc">延迟至12:00退房</view>
+    </view>
+    <view class="common-help">提前一小时入住许加收17元/延迟一小时退房需加收17元</view>
+  </view>
+  
 
   <!-- 搜索按钮 -->
   <button class="common-btn" bindtap="searchRoom">
@@ -102,6 +116,6 @@
 <modalView show="{{showModal}}" clickMaskClose="{{clickMaskClose}}">
   <view class="calendar">
     <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
-    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" />
+    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" startDate="2019-7-10" endDate="2019-9-10" />
   </view>
 </modalView>

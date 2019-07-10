@@ -137,10 +137,11 @@ Page({
    * 登录
    */
   login: function() {
-    app.getUserInfo();
-    // 跳转登录界面
-    wx.navigateTo({
-      url: '/pages/personal/login/login'
-    })
+    app.getUserInfo(function() {
+      // 跳转登录界面
+      wx.navigateTo({
+        url: '/pages/personal/login/login'
+      })
+    });
   }
 })

@@ -9,7 +9,9 @@ App({
     });
 
     // 获取定位
-    this.getLocation();
+    this.getLocation(function() {
+
+    });
   },
 
   /**
@@ -24,7 +26,7 @@ App({
 
 
   //获取用户地理位置
-  getLocation: function(obj) {
+  getLocation: function(callBack) {
     var that = this;
 
     wx.getLocation({
@@ -45,6 +47,7 @@ App({
             that.globalData.user.address.lat = addressRes.result.location.lat;
             that.globalData.user.address.lng = addressRes.result.location.lng;
             that.globalData.user.address.address = addressRes.result.address;
+            callBack();
           }
         })
       },
@@ -80,6 +83,7 @@ App({
                                   that.globalData.user.address.lat = addressRes.result.location.lat;
                                   that.globalData.user.address.lng = addressRes.result.location.lng;
                                   that.globalData.user.address.address = addressRes.result.address;
+                                  callBack();
                                 }
                               })
                             },
@@ -113,7 +117,7 @@ App({
   /**
    * 获取用户信息
    */
-  getUserInfo: function() {
+  getUserInfo: function(callBack) {
     var that = this;
     // 查看是否授权
     wx.getSetting({
@@ -126,6 +130,7 @@ App({
                 key: 'userInfo',
                 data: res.userInfo,
               })
+              callBack();
             }
           })
         }
