@@ -24,9 +24,9 @@
   <!-- 定位 -->
   <view class="search-location">
     <view>
-      <image src="{{searchImage}}" class="search-item-icon" />十堰
+      <image src="{{searchImage}}" class="search-item-icon" />{{myLocation}}
     </view>
-    <view>
+    <view bindtap="getLocation">
       <image src="{{locationImage}}" class="search-item-icon" />我的位置
     </view>
   </view>

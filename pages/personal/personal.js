@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+const util = require('../../utils/util.js')
 //获取应用实例
 const app = getApp()
 
@@ -69,6 +70,25 @@ Page({
 
   },
 
+  onShow: function() {
+    var that = this;
+    wx.getStorage({
+      key: 'isLogin',
+      success: function(res) {
+        if (res.data) {
+          wx.getStorage({
+            key: 'userInfo',
+            success: function(res) {
+              that.setData({
+                userInfo: res.data
+              })
+            },
+          })
+        }
+      },
+    })
+  },
+
   /**
    * 切换到在住服务tab页
    */
@@ -82,18 +102,14 @@ Page({
    * 跳转到钱包界面
    */
   navigateToMoney: function() {
-    wx.navigateTo({
-      url: '/pages/personal/money/money',
-    })
+    util.navigateTo('/pages/personal/money/money', true);
   },
 
   /**
    * 跳转到优惠券界面
    */
   navigateToCoupon: function() {
-    wx.navigateTo({
-      url: '/pages/personal/coupon/coupon',
-    })
+    util.navigateTo('/pages/personal/coupon/coupon', true);
   },
 
   /**
@@ -113,9 +129,18 @@ Page({
         icon: 'none'
       })
     } else {
-      wx.navigateTo({
-        url: this.data.routers[index].url,
-      })
+      util.navigateTo(this.data.routers[index].url, true);
     }
+  },
+
+  /**
+   * 登录
+   */
+  login: function() {
+    app.getUserInfo();
+    // 跳转登录界面
+    wx.navigateTo({
+      url: '/pages/personal/login/login'
+    })
   }
 })

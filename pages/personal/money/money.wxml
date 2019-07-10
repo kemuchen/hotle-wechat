@@ -1,5 +1,5 @@
 <!--pages/personal/money/money.wxml-->
-<view class="container" style="background-color: #fff;">
+<view class="container">
   <!-- 钱包余额 -->
   <view class="money-ye-box">
     <view class="money-ye">

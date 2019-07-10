@@ -270,8 +270,40 @@ let dateUtil = {
   }
 };
 
+var navigateTo = function(url, isCheckLogin) {
+  // 检查是否登录
+  if (isCheckLogin) {
+    wx.getStorage({
+      key: 'isLogin',
+      success: function(res) {
+        if (res.data) {
+          wx.navigateTo({
+            url: url,
+          })
+        } else {
+          wx.showToast({
+            title: '请先登录',
+            icon: 'none'
+          })
+        }
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+      }
+    })
+  } else {
+    wx.navigateTo({
+      url: url,
+    })
+  }
+};
+
 module.exports = {
   formatTime: formatTime,
   getBiggerzIndex: getBiggerzIndex,
-  dateUtil: dateUtil
+  dateUtil: dateUtil,
+  navigateTo: navigateTo
 }

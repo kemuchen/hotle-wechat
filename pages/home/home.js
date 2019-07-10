@@ -59,20 +59,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 加载轮播图片
     this.loadImages();
-    wx.requestPayment(
-      {
-        'timeStamp': '',
-        'nonceStr': '',
-        'package': '',
-        'signType': 'MD5',
-        'paySign': '',
-        'success': function (res) { 
-          console.log("success" + res);
-        },
-        'fail': function (res) {"fail" + console.log(res);},
-        'complete': function (res) {"complete" + console.log(res);}
-      }) 
+    // 加载位置信息
+    this.getLocation();
   },
 
   /**
@@ -186,5 +176,17 @@ Page({
         })
       }
     )
+  },
+
+  /**
+   * 定位
+   */
+  getLocation: function() {
+    if (!app.globalData.user.address.address) {
+      app.getLocation();
+    }
+    this.setData({
+      myLocation: app.globalData.user.address.address
+    })
   }
 })
