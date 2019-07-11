@@ -1,16 +1,14 @@
-// pages/home/fjxq/fjxq.js
+const util = require('../../../utils/util.js')
+const request = require('../../../utils/request.js')
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: { 
-    imgArr: [
-      'http://bpic.588ku.com/element_origin_min_pic/16/10/30/528aa13209e86d5d9839890967a6b9c1.jpg',
-      'http://bpic.588ku.com/element_origin_min_pic/16/10/30/54fcef525fa8f6037d180f3c26f3be65.jpg',
-      'http://bpic.588ku.com/element_origin_min_pic/16/10/30/62e3ca3a02dddb002eff00482078d194.jpg',
-      'http://bpic.588ku.com/element_origin_min_pic/16/10/31/c7167fcfb4ebcd12621c05b0c852e98e.jpg'
-    ],
+    imgArr: [],
     indicatorDots: false, //小点
     autoplay: true, //是否自动轮播
     interval: 3000, //间隔时间
@@ -125,49 +123,7 @@ Page({
         fyjg: 188
       }
     ],
-    fxList: [
-      {
-        image: '/resources/images/1.jpg',
-        fjlx: '商务标间',
-        sfhzc: '不含早',
-        fjmj: '35',
-        beds: '双床',
-        sfyc: '有窗',
-        price: '158'
-      }, {
-        image: '/resources/images/1.jpg',
-        fjlx: '商务标间',
-        sfhzc: '不含早',
-        fjmj: '35',
-        beds: '双床',
-        sfyc: '有窗',
-        price: '158'
-      }, {
-        image: '/resources/images/1.jpg',
-        fjlx: '商务标间',
-        sfhzc: '不含早',
-        fjmj: '35',
-        beds: '双床',
-        sfyc: '有窗',
-        price: '158'
-      }, {
-        image: '/resources/images/1.jpg',
-        fjlx: '商务标间',
-        sfhzc: '不含早',
-        fjmj: '35',
-        beds: '双床',
-        sfyc: '有窗',
-        price: '158'
-      }, {
-        image: '/resources/images/1.jpg',
-        fjlx: '商务标间',
-        sfhzc: '不含早',
-        fjmj: '35',
-        beds: '双床',
-        sfyc: '有窗',
-        price: '158'
-      }
-    ],
+    fxList: [],
     showModal: false
   },
 
@@ -175,7 +131,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(options);
+    var hotelid = options.hotelid;
+    this.setData({
+      hotleid: hotelid
+    })
+    // 加载酒店图片
+    this.loadHotelImage();
+    //加载酒店房型
+    this.loadHotelRommType();
   },
 
   /**
@@ -262,5 +226,87 @@ Page({
     wx.navigateTo({
       url: '/pages/home/fjyd/fjyd',
     })
+  },
+
+  /**
+   * 加载酒店图片信息
+   */
+  loadHotelImage: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'getHotelImagesShow',
+      body: {
+        jdid: this.data.hotleid
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        that.setData({
+          imgArr: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
+  },
+
+  /**
+   * 加载酒店信息
+   */
+  loadHotelInfo: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'getHotelInfo',
+      body: {
+        is: this.data.hotleid
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        that.setData({
+          hotel: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
+  },
+
+  /**
+   * 加载酒店房型信息
+   */
+  loadHotelRommType: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'getHotelRoomTypesAndRooms',
+      body: {
+        jdid: this.data.hotleid
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        console.log(data);
+        that.setData({
+          fxList: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
   }
 })

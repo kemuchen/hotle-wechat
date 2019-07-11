@@ -28,13 +28,12 @@
 <view class="tab-container" hidden="{{currentTab != 1}}">
   <view class="fxxz-item" wx:for="{{fxList}}">
     <view class="fxxz-info" bindtap="ckfjxx">
-      <image src="{{item.image}}" class="fxxz-item-image"></image>
+      <image src="{{item.imageUrl}}" class="fxxz-item-image"></image>
       <view class="fxxz-desc">
         <view class="fxxz-fjlx">{{item.fjlx}}</view>
-        <view class="fxxz-fjxx">{{item.sfhzc}} {{item.fjmj}}m
-          <sup>2</sup> {{item.beds}} {{item.sfyc}}
+        <view class="fxxz-fjxx">共 {{item.fjsl}} 间
         </view>
-        <view class="fxxz-fjjg">￥{{item.price}}</view>
+        <view class="fxxz-fjjg">￥{{item.fjjg}}</view>
       </view>
     </view>
     <view class="fxxz-btns">

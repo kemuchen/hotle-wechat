@@ -26,31 +26,7 @@ Page({
     rzsj: '6月27',
     ldsj: '6月28',
     rzts: '一天',
-    tjfyList: [{
-      url: '/resources/images/1.jpg',
-      fyxj: '三星级',
-      fypf: 3.0,
-      fymc: '精致大床房',
-      fyjg: 188
-    }, {
-      url: '/resources/images/2.jpg',
-      fyxj: '四星级',
-      fypf: 5.0,
-      fymc: '豪华大床房',
-      fyjg: 256
-    }, {
-      url: '/resources/images/3.jpg',
-      fyxj: '四星级',
-      fypf: 4.0,
-      fymc: '双人房',
-      fyjg: 220
-    }, {
-      url: '/resources/images/4.jpg',
-      fyxj: '三星级',
-      fypf: 5.0,
-      fymc: '精致大床房',
-      fyjg: 188
-    }],
+    tjfyList: [],
     currentRzlx: 1,
     clickMaskClose: false
   },
@@ -123,9 +99,9 @@ Page({
   /**
    * 跳转到房间详情界面
    */
-  navigateToFjxq: function() {
+  navigateToFjxq: function(e) {
     wx.navigateTo({
-      url: '/pages/home/fjxq/fjxq',
+      url: '/pages/home/fjxq/fjxq?hotelid=' + e.currentTarget.dataset.hotleid,
     })
   },
 
@@ -173,6 +149,7 @@ Page({
       function(data) {
         wx.showToast({
           title: '请求错误',
+          icon: 'none'
         })
       }
     )
@@ -188,7 +165,40 @@ Page({
         that.setData({
           myLocation: app.globalData.user.address.address
         })
+        that.loadTjfy();
       });
+    } else {
+      that.setData({
+        myLocation: app.globalData.user.address.address
+      })
+      that.loadTjfy();
     }
+  },
+
+  /**
+   * 加载推荐房源
+   */
+  loadTjfy: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'getHotels',
+      body: {
+        city: app.globalData.user.address.city
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        that.setData({
+          tjfyList: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
   }
 })

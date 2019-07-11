@@ -68,7 +68,7 @@
       <switch bindchange="switchChange" />
       <view class="time-switch-item-desc">延迟至12:00退房</view>
     </view>
-    <view class="common-help">提前一小时入住许加收17元/延迟一小时退房需加收17元</view>
+    <view class="common-help" style="font-size:20rpx; margin-top:0px;">提前一小时入住许加收17元/延迟一小时退房需加收17元</view>
   </view>
   
 
@@ -89,19 +89,19 @@
 
 <!-- 房源展示 -->
 <scroll-view class="tjfy-box" scroll-x>
-  <view class="tjfy-box-fy" wx:for="{{tjfyList}}" bindtap="navigateToFjxq">
+  <view class="tjfy-box-fy" wx:for="{{tjfyList}}" bindtap="navigateToFjxq" data-hotleid="{{item.id}}">
     <!-- 房源图片 -->
     <view class="tjfy-box-fy-image">
       <image src="{{item.url}}" class="tjfy-box-fy-image" />
     </view>
     <!-- 房源描述 -->
     <view class="tjfy-box-fy-fypf">
-      <view>{{item.fyxj}}</view>
+      <view>{{item.star}}</view>
       <view>评分：{{item.fypf}}</view>
     </view>
-    <view class="tjfy-box-fy-fymc">{{item.fymc}}</view>
+    <view class="tjfy-box-fy-fymc">{{item.name}}</view>
     <view>
-      <text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
+      <text style="font-size: 25rpx; color: red;">￥{{item.fjjg}}</text>
       <text style="font-size: 20rpx; margin-left: 5px;">起/晚</text>
     </view>
   </view>
