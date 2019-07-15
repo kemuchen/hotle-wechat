@@ -14,10 +14,10 @@
 
 <!-- 房间详情介绍 -->
 <view class="container">
-  <view class="jdmc">梦幻珊瑚</view>
+  <view class="jdmc">{{hotel.name}}</view>
   <view class="jdwz">
     <image src="{{locationImage}}" class="location-icon"></image>
-    <view class="location-text">湖北省十堰市茅箭区朝阳南路四四长</view>
+    <view class="location-text">{{hotel.province}}{{hotel.city}}{{hotel.area}}{{hotel.street}}{{hotel.address}}</view>
     <view class="tencent-map-icon-box" bindtap="openTencentMap">
       <image src="{{mapImage}}" class="tencent-map-icon"></image>
     </view>
@@ -27,7 +27,7 @@
 <!-- 房型选择 -->
 <view class="tab-container" hidden="{{currentTab != 1}}">
   <view class="fxxz-item" wx:for="{{fxList}}">
-    <view class="fxxz-info" bindtap="ckfjxx">
+    <view class="fxxz-info" bindtap="ckfjxx" data-typeid="{{item.id}}">
       <image src="{{item.imageUrl}}" class="fxxz-item-image"></image>
       <view class="fxxz-desc">
         <view class="fxxz-fjlx">{{item.fjlx}}</view>
@@ -37,7 +37,7 @@
       </view>
     </view>
     <view class="fxxz-btns">
-      <button class="order-btn" bindtap="navigateToFjyd">预定</button>
+      <button class="order-btn" bindtap="navigateToFjyd" data-typeid="{{item.id}}">预定</button>
     </view>
   </view>
 </view>
@@ -122,10 +122,10 @@
     <!-- 立即预定 -->
     <view class="order-box">
       <view class="price">
-        <text style="font-size: 40rpx; font-weight: bold">￥208.00</text>
+        <text style="font-size: 40rpx; font-weight: bold">￥{{fjlx.fjjg}}</text>
         <text style="font-size: 30rpx;">起/晚</text>
       </view>
-      <button class="button-btn" bindtap="navigateToFjyd">预定</button>
+      <button class="button-btn" bindtap="navigateToFjyd" data-typeid="{{fjlx.id}}">预定</button>
     </view>
   </view>
 </modalView>
@@ -134,7 +134,7 @@
   <view class="fjpj-fjpf">
     <view class="fjpj-fjpf-zhpf">
       <view class="fjpj-fjpf-zhpf-fs">5.0</view>
-      <view class="fjpj-fjpf-zhpf-pjrs">(29条评价)</view>
+      <view class="fjpj-fjpf-zhpf-pjrs">({{yhpjList.length}}条评价)</view>
     </view>
     <view class="fjpj-fjpf-xjpf">
       <view class="fjpj-fjpf-xjpf-item" wx:for="{{pfList}}">
@@ -152,7 +152,7 @@
   </view>
   <!-- 用户评价 -->
   <view class="yhpj-box">
-    <view class="yhpj-title">共有29条评价</view>
+    <view class="yhpj-title">共有{{yhpjList.length}}条评价</view>
     <view class="yhpj-item" wx:for="{{yhpjList}}">
       <view class="yhpj-yhxx-box">
         <view class="yhpj-yhxx">
@@ -177,19 +177,19 @@
 </view>
 <!-- 附近房源 -->
 <scroll-view class="fjfy-box" scroll-y hidden="{{currentTab != 3}}">
-  <view class="fjfy-box-fy" wx:for="{{fjfyList}}" bindtap="navigateToFjxq">
+  <view class="fjfy-box-fy" wx:for="{{fjfyList}}" bindtap="navigateToFjxq" data-hotelid="item.id">
     <!-- 房源图片 -->
     <view class="fjfy-box-fy-image">
       <image src="{{item.url}}" class="fjfy-box-fy-image" />
     </view>
     <!-- 房源描述 -->
     <view class="fjfy-box-fy-fypf">
-      <view>{{item.fyxj}}</view>
+      <view>{{item.star}}</view>
       <view>评分：{{item.fypf}}</view>
     </view>
-    <view class="fjfy-box-fy-fymc">{{item.fymc}}</view>
+    <view class="fjfy-box-fy-fymc">{{item.name}}</view>
     <view>
-      <text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
+      <text style="font-size: 25rpx; color: red;">￥{{item.fjjg}}</text>
       <text style="font-size: 20rpx; margin-left: 5px;">起/晚</text>
     </view>
   </view>

@@ -96,35 +96,10 @@ Page({
         pjnr: '一般般'
       },
     ],
-    fjfyList: [
-      {
-        url: '/resources/images/1.jpg',
-        fyxj: '三星级',
-        fypf: 3.0,
-        fymc: '精致大床房',
-        fyjg: 188
-      }, {
-        url: '/resources/images/2.jpg',
-        fyxj: '四星级',
-        fypf: 5.0,
-        fymc: '豪华大床房',
-        fyjg: 256
-      }, {
-        url: '/resources/images/3.jpg',
-        fyxj: '四星级',
-        fypf: 4.0,
-        fymc: '双人房',
-        fyjg: 220
-      }, {
-        url: '/resources/images/4.jpg',
-        fyxj: '三星级',
-        fypf: 5.0,
-        fymc: '精致大床房',
-        fyjg: 188
-      }
-    ],
+    fjfyList: [],
     fxList: [],
-    showModal: false
+    showModal: false,
+    hotel: {}
   },
 
   /**
@@ -132,14 +107,16 @@ Page({
    */
   onLoad: function(options) {
     console.log(options);
-    var hotelid = options.hotelid;
     this.setData({
-      hotleid: hotelid
+      hotelid: options.hotelid
     })
-    // 加载酒店图片
-    this.loadHotelImage();
-    //加载酒店房型
-    this.loadHotelRommType();
+    if (options.ydsj) {
+      this.setData({
+        ydsj: JSON.parse(options.ydsj)
+      });
+    }
+    //加载酒店信息
+    this.loadHotelInfo();
   },
 
   /**
@@ -166,7 +143,6 @@ Page({
    * 预览图片
    */
   previewImg: function(e) {
-    console.log(e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
     var imgArr = this.data.imgArr;
     wx.previewImage({
@@ -192,8 +168,8 @@ Page({
    * 打开腾讯地图
    */
   openTencentMap: function() {
-    let latitude = 32.66192229056618;
-    let longitude = 110.80089569089998;
+    let latitude = this.data.hotel.latitude;
+    let longitude = this.data.hotel.longitude;
     wx.openLocation({
       latitude,
       longitude,
@@ -205,45 +181,36 @@ Page({
    * 跳转到房间详情界面
    */
   navigateToFjxq: function() {
-    wx.navigateTo({
-      url: '/pages/home/fjxq/fjxq',
-    })
+    if (this.data.ydsj) {
+      wx.navigateTo({
+        url: '/pages/home/fjxq/fjxq?ydsj' + JSON.stringify(this.data.ydsj) + '&hotelid=' + this.data.hotelid,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/home/fjxq/fjxq?hotelid=' + this.data.hotelid,
+      })
+    }
   },
 
   /**
    * 查看房间信息
    */
-  ckfjxx: function() {
-    this.setData({
-      showModal: true
-    });
-  },
-
-  /**
-   * 跳转到房间预定界面
-   */
-  navigateToFjyd: function() {
-    wx.navigateTo({
-      url: '/pages/home/fjyd/fjyd',
-    })
-  },
-
-  /**
-   * 加载酒店图片信息
-   */
-  loadHotelImage: function() {
+  ckfjxx: function(e) {
     let params = {
-      url: app.globalData.serverUrl + 'getHotelImagesShow',
+      url: app.globalData.serverUrl + 'getHomeType',
       body: {
-        jdid: this.data.hotleid
+        id: e.currentTarget.dataset.typeid
       }
     }
     let that = this;
     request.doRequest(
       params,
       function (data) {
+        data.fjjg = util.parseDouble(data.fjjg);
+        data.hyjg = util.parseDouble(data.hyjg);
         that.setData({
-          imgArr: data
+          fjlx: data,
+          showModal: true
         })
       },
       function (data) {
@@ -253,6 +220,21 @@ Page({
         })
       }
     )
+  },
+
+  /**
+   * 跳转到房间预定界面
+   */
+  navigateToFjyd: function(e) {
+    if (this.data.ydsj) {
+      wx.navigateTo({
+        url: '/pages/home/fjyd/fjyd?ydsj=' + JSON.stringify(this.data.ydsj) + '&hotel=' + JSON.stringify(this.data.hotel) + '&fjlxid=' + e.currentTarget.dataset.typeid,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/home/fjyd/fjyd?hotel=' + JSON.stringify(this.data.hotel) + '&fjlxid=' + e.currentTarget.dataset.typeid,
+      })
+    }
   },
 
   /**
@@ -260,36 +242,9 @@ Page({
    */
   loadHotelInfo: function() {
     let params = {
-      url: app.globalData.serverUrl + 'getHotelInfo',
+      url: app.globalData.serverUrl + 'getHotel',
       body: {
-        is: this.data.hotleid
-      }
-    }
-    let that = this;
-    request.doRequest(
-      params,
-      function (data) {
-        that.setData({
-          hotel: data
-        })
-      },
-      function (data) {
-        wx.showToast({
-          title: '请求错误',
-          icon: 'none'
-        })
-      }
-    )
-  },
-
-  /**
-   * 加载酒店房型信息
-   */
-  loadHotelRommType: function() {
-    let params = {
-      url: app.globalData.serverUrl + 'getHotelRoomTypesAndRooms',
-      body: {
-        jdid: this.data.hotleid
+        jdid: this.data.hotelid
       }
     }
     let that = this;
@@ -298,7 +253,11 @@ Page({
       function (data) {
         console.log(data);
         that.setData({
-          fxList: data
+          hotel: data.hotel,
+          fxList: data.fxList,
+          yhpjList: data.yhpjList,
+          fjfyList: data.fjfyList,
+          imgArr: data.imgArr
         })
       },
       function (data) {
@@ -308,5 +267,5 @@ Page({
         })
       }
     )
-  }
+  },
 })

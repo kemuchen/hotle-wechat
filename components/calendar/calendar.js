@@ -768,9 +768,10 @@ Component({
         } else {
           dateEnd = click_day;
         }
-
         if (dateEnd != undefined) {
-          if (dateStart == dateEnd) {
+          // 选择同一天返回
+          if (dateStart.year == dateEnd.year && dateStart.month == dateEnd.month &&
+            dateStart.day == dateEnd.day) {
             return;
           }
           

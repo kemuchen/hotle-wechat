@@ -15,7 +15,7 @@
 
 <!-- 排序条件 -->
 <view class="order-condition">
-  <view class="order-condition-item">06.27-06.28<view class="triangle-down"></view></view>
+  <view wx:if="{{ydsj}}" class="order-condition-item">{{ydsj.rzsj}}-{{ydsj.ldsj}}<view class="triangle-down"></view></view>
   <view class="order-condition-item">区域<view class="triangle-down"></view></view>
   <view class="order-condition-item">推荐排序<view class="triangle-down"></view></view>
   <view class="order-condition-item">门店选房<view class="triangle-down"></view></view>
@@ -35,16 +35,16 @@
   <!-- 右侧房间列表 -->
   <view class="room-lis-right" style="height: {{roomListHeight}}px;">
     <scroll-view class="tjfy-box" scroll-y>
-      <view class="tjfy-box-fy" wx:for="{{tjfyList}}" bindtap="navigateToFjxq">
+      <view class="tjfy-box-fy" wx:for="{{sxfyList}}" bindtap="navigateToFjxq" data-hotelid="{{item.id}}">
         <!-- 房源图片 -->
         <view class="tjfy-box-fy-image"><image src="{{item.url}}" class="tjfy-box-fy-image"/></view>
         <!-- 房源描述 -->
         <view class="tjfy-box-fy-fypf">
-          <view>{{item.fyxj}}</view>
+          <view>{{item.star}}</view>
           <view>评分：{{item.fypf}}</view>
         </view>
-        <view class="tjfy-box-fy-fymc">{{item.fymc}}</view>
-        <view><text style="font-size: 25rpx; color: red;">￥{{item.fyjg}}</text>
+        <view class="tjfy-box-fy-fymc">{{item.name}}</view>
+        <view><text style="font-size: 25rpx; color: red;">￥{{item.fjjg}}</text>
           <text style="font-size: 20rpx; margin-left: 5px;">起/晚</text></view>
       </view>
     </scroll-view>

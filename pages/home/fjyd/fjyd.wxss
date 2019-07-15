@@ -142,7 +142,7 @@ Page{
 .input-box {
   margin-right: 10px;
   text-align: right;
-  width: 70%;
+  width: 50%;
 }
 .calendar {
   background-color: #ffffff;
@@ -170,4 +170,21 @@ Page{
   margin-top: 10px;
   font-size: 25rpx;
   color: #8a8a8a;
+}
+.brrz-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25rpx;
+  color: #ea9518;
+  border: 1px solid #ea9518;
+  border-radius: 0;
+  background-color: #fff;
+  padding: 0px 1px;
+  margin-left: 2px;
+}
+.user-plus {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
 }

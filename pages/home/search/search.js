@@ -1,4 +1,8 @@
 // pages/home/search/search.js
+const util = require('../../../utils/util.js')
+const request = require('../../../utils/request.js')
+var app = getApp();
+
 Page({
 
   /**
@@ -7,33 +11,7 @@ Page({
   data: {
     currentTab: 1,
     searchImage: '/resources/images/home/search_2.png',
-    tjfyList: [
-      {
-        url: '/resources/images/1.jpg',
-        fyxj: '三星级',
-        fypf: 3.0,
-        fymc: '精致大床房',
-        fyjg: 188
-      }, {
-        url: '/resources/images/2.jpg',
-        fyxj: '四星级',
-        fypf: 5.0,
-        fymc: '豪华大床房',
-        fyjg: 256
-      }, {
-        url: '/resources/images/3.jpg',
-        fyxj: '四星级',
-        fypf: 4.0,
-        fymc: '双人房',
-        fyjg: 220
-      }, {
-        url: '/resources/images/4.jpg',
-        fyxj: '三星级',
-        fypf: 5.0,
-        fymc: '精致大床房',
-        fyjg: 188
-      }
-    ],
+    sxfyList: [],
     scrollTop: 100,
     roomListHeight: 100,
     tabList: [
@@ -52,8 +30,14 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      roomListHeight: wx.getSystemInfoSync().windowHeight - 101.5
+      roomListHeight: wx.getSystemInfoSync().windowHeight - 101.5,
     })
+    if (options.ydsj) {
+      this.setData({
+        ydsj: JSON.parse(options.ydsj)
+      })
+    }
+    this.loadSxfy();
   },
 
   /**
@@ -72,9 +56,40 @@ Page({
   /**
    * 跳转到房间详情界面
    */
-  navigateToFjxq: function() {
-    wx.navigateTo({
-      url: '/pages/home/fjxq/fjxq',
-    })
+  navigateToFjxq: function(e) {
+    if (this.data.ydsj) {
+      wx.navigateTo({
+        url: '/pages/home/fjxq/fjxq?ydsj=' + JSON.stringify(this.data.ydsj) + '&hotelid=' + e.currentTarget.dataset.hotelid,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/home/fjxq/fjxq?&hotelid=' + e.currentTarget.dataset.hotelid,
+      })
+    }
+  },
+
+  /**
+   * 加载推荐房源
+   */
+  loadSxfy: function () {
+    let params = {
+      url: app.globalData.serverUrl + 'getHotels',
+      body: {}
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        that.setData({
+          sxfyList: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
   }
 })

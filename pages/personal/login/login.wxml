@@ -13,16 +13,16 @@
         <view class="input-item-icon">
           <image src="/resources/images/user/phone.png"></image>
         </view>
-        <input class="input-item-phone" placeholder="请输入手机号"></input>
+        <input class="input-item-phone" type="number" placeholder="请输入手机号" bindinput="inputPhoneNum" maxlength="11"></input>
       </view>
       <view class="input-item">
         <view class="input-item-icon">
           <image src="/resources/images/user/code.png"></image>
         </view>
         <input class="input-item-code" placeholder="验证码"></input>
-        <button class="code-btn">获取验证码</button>
+        <button class="code-btn" bindtap="getCode" disabled="{{code_btn_disabled}}">{{code_btn}}</button>
       </view>
-      <button class="login-btn bg-login" bindtap="login">登录</button>
+      <button class="login-btn bg-login" bindtap="login" bindtap="login">登录</button>
       <button class="login-btn bg-back" bindtap="hidePhoneLogin">返回</button>
     </view>
   </view>

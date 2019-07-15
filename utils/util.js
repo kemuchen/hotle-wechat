@@ -262,11 +262,11 @@ let dateUtil = {
   },
 
   // 计算日期之间相差天数
-  dateDiff: function (sDate1, sDate2) {
+  dateDiff: function(sDate1, sDate2) {
     sDate1 = new Date(sDate1);
     sDate2 = new Date(sDate2);
     let iDays = parseInt((sDate1 - sDate2) / 1000 / 60 / 60 / 24); // 把相差的毫秒数转换为天数
-    return iDays + 1; //返回相差天数
+    return iDays; //返回相差天数
   }
 };
 
@@ -301,9 +301,24 @@ var navigateTo = function(url, isCheckLogin) {
   }
 };
 
+var parseDouble = function(num) {
+  num += '';
+  num = num.replace(/[^0-9|\.]/g, ''); //清除字符串中的非数字非.字符  
+  if (/^0+/) //清除字符串开头的0  
+    num = num.replace(/^0+/, '');
+  if (!/\./.test(num)) //为整数字符串在末尾添加.00  
+    num += '.00';
+  if (/^\./.test(num)) //字符以.开头时,在开头添加0  
+    num = '0' + num;
+  num += '00'; //在字符串末尾补零  
+  num = num.match(/\d+\.\d{2}/)[0];
+  return num;
+}
+
 module.exports = {
   formatTime: formatTime,
   getBiggerzIndex: getBiggerzIndex,
   dateUtil: dateUtil,
-  navigateTo: navigateTo
+  navigateTo: navigateTo,
+  parseDouble: parseDouble
 }

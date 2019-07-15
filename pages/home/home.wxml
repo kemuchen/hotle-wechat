@@ -24,7 +24,8 @@
   <!-- 定位 -->
   <view class="search-location">
     <view>
-      <image src="{{searchImage}}" class="search-item-icon" />{{myLocation}}
+      <image src="{{searchImage}}" class="search-item-icon" />
+      <address my-city="北京" data="{{city}}" binddetail="bindtap"></address>{{myLocation}}
     </view>
     <view bindtap="getLocation">
       <image src="{{locationImage}}" class="search-item-icon" />我的位置
@@ -38,7 +39,7 @@
       <view class="search-rzsj-item-rz">入住</view>
       <view class="search-rzsj-item-rq">
         <image src="{{calendarImage}}" class="search-item-icon" />{{rzsj}}          </view>
-      <view class="search-rzsj-item-week">星期四 14:00</view>
+      <view class="search-rzsj-item-week">{{rzsjWeek}} 14:00</view>
     </view>
     <!-- 天数 -->
     <view class="search-rzsj-item-ts">
@@ -54,7 +55,7 @@
       <view class="search-rzsj-item-rz">离店</view>
       <view class="search-rzsj-item-rq">
         <image src="{{calendarImage}}" class="search-item-icon" />{{ldsj}}        </view>
-      <view class="search-rzsj-item-week">星期四 14:00</view>
+      <view class="search-rzsj-item-week">{{ldsjWeek}} 12:00</view>
     </view>
   </view>
 
@@ -89,7 +90,7 @@
 
 <!-- 房源展示 -->
 <scroll-view class="tjfy-box" scroll-x>
-  <view class="tjfy-box-fy" wx:for="{{tjfyList}}" bindtap="navigateToFjxq" data-hotleid="{{item.id}}">
+  <view class="tjfy-box-fy" wx:for="{{tjfyList}}" bindtap="navigateToFjxq" data-hotelid="{{item.id}}">
     <!-- 房源图片 -->
     <view class="tjfy-box-fy-image">
       <image src="{{item.url}}" class="tjfy-box-fy-image" />

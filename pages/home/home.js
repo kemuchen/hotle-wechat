@@ -23,9 +23,6 @@ Page({
     searchBtnImage: '/resources/images/home/search_w.png',
     rightArrowImage: '/resources/images/right-arr.png',
     showModal: false,
-    rzsj: '6月27',
-    ldsj: '6月28',
-    rzts: '一天',
     tjfyList: [],
     currentRzlx: 1,
     clickMaskClose: false
@@ -39,6 +36,16 @@ Page({
     this.loadImages();
     // 加载位置信息
     this.getLocation();
+
+    this.setData({
+      rzsj: util.dateUtil.format(new Date(), 'M月D'),
+      ldsj: util.dateUtil.format(util.dateUtil.nextDay(), 'M月D'),
+      rzsjWeek: util.dateUtil.getDetail(new Date()).weekday,
+      ldsjWeek: util.dateUtil.getDetail(util.dateUtil.nextDay()).weekday,
+      rzts: '一天',
+      rzsjDate: util.dateUtil.format(new Date(), 'Y-M-D'),
+      ldsjDate: util.dateUtil.format(util.dateUtil.nextDay(), 'Y-M-D')
+    })
   },
 
   /**
@@ -64,12 +71,15 @@ Page({
     let dateStart = e.detail.dateStart;
     let dateEnd = e.detail.dateEnd;
     let rzts = util.dateUtil.dateDiff(this.formaDate(dateEnd), this.formaDate(dateStart));
-    console.log(rzts);
     this.setData({
       showModal: false,
       rzsj: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
       ldsj: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
-      rzts: util.dateUtil.convertToChinaNum(rzts) + '天'
+      rzts: util.dateUtil.convertToChinaNum(rzts) + '天',
+      rzsjDate: this.formaDate(dateStart),
+      ldsjDate: this.formaDate(dateEnd),
+      rzsjWeek: util.dateUtil.getDetail(util.dateUtil.parse(this.formaDate(dateStart), 'y-m-d')).weekday,
+      ldsjWeek: util.dateUtil.getDetail(util.dateUtil.parse(this.formaDate(dateEnd), 'y-m-d')).weekday,
     })
   },
 
@@ -82,9 +92,17 @@ Page({
    * 跳转到搜索房间界面
    */
   searchRoom: function() {
-    wx.navigateTo({
-      url: '/pages/home/search/search',
-    })
+    var params = {
+      rzsj: this.data.rzsj,
+      ldsj: this.data.ldsj,
+      rzts: this.data.rzts,
+      rzsjDate: this.data.rzsjDate,
+      ldsjDate: this.data.ldsjDate,
+      rzsjWeek: this.data.rzsjWeek,
+      ldsjWeek: this.data.ldsjWeek
+    }
+    console.log(params);
+    util.navigateTo('/pages/home/search/search?ydsj=' + JSON.stringify(params), true);
   },
 
   /**
@@ -100,9 +118,7 @@ Page({
    * 跳转到房间详情界面
    */
   navigateToFjxq: function(e) {
-    wx.navigateTo({
-      url: '/pages/home/fjxq/fjxq?hotelid=' + e.currentTarget.dataset.hotleid,
-    })
+    util.navigateTo('/pages/home/fjxq/fjxq?hotelid=' + e.currentTarget.dataset.hotelid, true);
   },
 
   /**

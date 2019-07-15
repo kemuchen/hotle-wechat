@@ -1,4 +1,8 @@
 // pages/service/service.js
+const util = require('../../utils/util.js')
+const request = require('../../utils/request.js')
+var app = getApp();
+
 Page({
 
   /**
@@ -99,9 +103,7 @@ Page({
    * 跳转到房间搜索界面
    */
   navigateToSearch: function() {
-    wx.navigateTo({
-      url: '/pages/home/search/search',
-    })
+    util.navigateTo('/pages/home/search/search', true);
   },
 
   /**
