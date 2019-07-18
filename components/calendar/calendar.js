@@ -294,6 +294,7 @@ Component({
      * 设置起始日期
      */
     _setStartDate: function(newDate, oldDate) {
+      console.log(newDate.length + ',' + newDate.indexOf('-'));
       if (newDate.length <= 10 && newDate.indexOf('-') == 4) {
         const year = parseInt(newDate.split('-')[0]);
         const month = parseInt(newDate.split('-')[1]);
@@ -330,10 +331,10 @@ Component({
             max_day: day
           });
         } else {
-          throw new Error('结束日期必须是YYYY-MM格式，且小于等于2099-12');
+          throw new Error('结束日期必须是YYYY-MM-DD格式，且小于等于2099-12');
         }
       } else {
-        throw new Error('结束日期必须是YYYY-MM格式');
+        throw new Error('结束日期必须是YYYY-MM-DD格式');
       }
     },
 

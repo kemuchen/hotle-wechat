@@ -15,7 +15,7 @@
 
 <!-- 排序条件 -->
 <view class="order-condition">
-  <view wx:if="{{ydsj}}" class="order-condition-item">{{ydsj.rzsj}}-{{ydsj.ldsj}}<view class="triangle-down"></view></view>
+  <view class="order-condition-item" bindtap="selectRzsj">{{rzrq}}-{{tfrq}}<view class="triangle-down"></view></view>
   <view class="order-condition-item">区域<view class="triangle-down"></view></view>
   <view class="order-condition-item">推荐排序<view class="triangle-down"></view></view>
   <view class="order-condition-item">门店选房<view class="triangle-down"></view></view>
@@ -50,3 +50,11 @@
     </scroll-view>
   </view>
 </view>
+
+<!-- 日历组件 -->
+<modalView show="{{showModal}}" clickMaskClose="{{clickMaskClose}}">
+  <view class="calendar">
+    <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
+    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" startDate="{{startDate}}" endDate="{{endDate}}" />
+  </view>
+</modalView>

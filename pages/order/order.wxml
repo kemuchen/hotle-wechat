@@ -1,33 +1,54 @@
 <!--pages/order/order.wxml-->
-<!-- 顶部tab导航 -->
-<tab tabList="{{tabList}}" bindswichNav="swichNav"></tab>
+<view class="page" style="background-color:{{pageBackgroundColor}}">
+  <!-- 顶部tab导航 -->
+  <tab tabList="{{tabList}}" bindswichNav="swichNav"></tab>
 
-<!-- 订单列表 -->
-<view class="order-item" wx:for="{{orderList}}">
-  <!-- 订单标题 -->
-  <view class="order-item-title" bindtap="navigateToOrderInfo">
-    <view class="order-item-title-fjmc">{{item.fjmc}}</view>
-    <view class="order-item-title-ddzt">{{item.ddzt}}</view>
-  </view>
-
-  <!-- 订单信息 -->
-  <view class="order-item-info" bindtap="navigateToOrderInfo">
-    <view class="order-item-info-image">
-      <image src="{{imageSrc}}" class="order-item-info-image-image"></image>
+  <!-- 订单列表 -->
+  <view class="order-item" wx:for="{{orderList}}">
+    <!-- 订单标题 -->
+    <view class="order-item-title" bindtap="navigateToOrderInfo">
+      <view class="order-item-title-fjmc">{{item.name}}-{{item.fjlx}}</view>
+      <view class="order-item-title-ddzt">{{item.ddztname}}</view>
     </view>
-    <view class="order-item-info-info">
-      <view class="order-item-info-fjxx">
-        <view>{{item.rzsj}} - {{item.ldsj}}</view>
-        <view>{{item.lc}}楼 {{item.fjh}}</view>
+
+    <!-- 订单信息 -->
+    <view class="order-item-info" bindtap="navigateToOrderInfo">
+      <view class="order-item-info-image">
+        <image src="{{imageSrc}}" class="order-item-info-image-image"></image>
       </view>
-      <view class="order-item-info-fyxx">
-        ￥{{item.sfje}}
+      <view class="order-item-info-info">
+        <view class="order-item-info-fjxx">
+          <view>{{item.rzsj}} - {{item.ldsj}}</view>
+          <view>{{item.lc}}楼 {{item.fjh}}</view>
+        </view>
+        <view class="order-item-info-fyxx">
+          ￥{{item.sfje}}
+        </view>
       </view>
     </view>
-  </view>
 
-  <!-- 操作 -->
-  <view class="order-item-oper">
+    <!-- 操作 -->
+    <view class="order-item-oper" wx:if="{{item.ddzt == 4 || item.ddzt == 5 || item.ddzt == 6}}">
       <button class="order-item-oper-btn" bindtap="navigateToOrder">再次预定</button>
+    </view>
+    <!-- 操作 -->
+    <view class="order-item-oper" wx:if="{{item.ddzt == 1}}">
+      <button class="order-item-oper-btn" bindtap="navigateToOrder">立即支付</button>
+    </view>
+    <!-- 操作 -->
+    <view class="order-item-oper" wx:if="{{item.ddzt == 2}}">
+      <button class="order-item-oper-btn" bindtap="navigateToOrder">办理入住</button>
+    </view>
+    <!-- 操作 -->
+    <view class="order-item-oper" wx:if="{{item.ddzt == 3}}">
+      <button class="order-item-oper-btn" bindtap="navigateToOrder">续住</button>
+    </view>
+  </view>
+
+  <!-- 没有订单 -->
+  <view class="no-order" hidden="{{orderList.length != 0}}">
+    <image src="/resources/images/home/order_1.png" class="order-image"></image>
+    <text class="tip-text">你当前暂无{{tabname}}订单</text>
+    <button class="go-btn" bindtap="navigateToSearch">去逛逛</button>
   </view>
 </view>

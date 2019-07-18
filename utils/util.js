@@ -67,18 +67,18 @@ let dateUtil = {
 
   },
 
-  //获取前一个月
-  preMonth: function(d) {
+  //获取n个月
+  preMonth: function(d, n) {
     if (typeof d === 'string') d = new Date(d);
     else d = new Date();
-    let date = new Date(d.getFullYear(), d.getMonth() - 1)
+    let date = new Date(d.getFullYear(), d.getMonth() - n, d.getDate())
     return date;
   },
 
-  nextMonth: function(d) {
+  nextMonth: function(d, n) {
     if (typeof d === 'string') d = new Date(d);
     else d = new Date();
-    let date = new Date(d.getFullYear(), d.getMonth() + 1)
+    let date = new Date(d.getFullYear(), d.getMonth() + n, d.getDate())
     return date;
   },
 

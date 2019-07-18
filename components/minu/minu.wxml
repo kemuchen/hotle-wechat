@@ -6,5 +6,5 @@
 	<!-- 数值 -->
 	<input type="number" bindchange="Manual" value="{{num}}" />
 	<!-- 加号 -->
-	<view class="normal" bindtap="Plus">+</view>
+	<view class="{{plusStatus}}" bindtap="Plus">+</view>
 </view>

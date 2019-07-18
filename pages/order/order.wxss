@@ -13,7 +13,6 @@ page{
 }
 
 .order-item {
-  height: 190px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -95,6 +94,7 @@ page{
 
 .order-item-oper-btn {
   margin-right: 10px;
+  margin-bottom: 10px;
   height: 25px;
   border: 1px solid #8a8a8a;
   color: #8a8a8a;
@@ -107,4 +107,47 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.no-order {
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+}
+.order-image {
+  width: 50px;
+  height: 50px;
+}
+.tip-text {
+  font-size: 30rpx;
+  color: #8a8a8a;
+  margin-top: 10px;
+}
+.go-btn {
+  margin-top: 20px;
+  width: 80px;
+  height: 25px;
+  font-size: 30rpx;
+  border-top-left-radius: 12.5px;
+  border-top-right-radius: 12.5px;
+  border-bottom-left-radius: 12.5px;
+  border-bottom-right-radius: 12.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ea9518;
+  color: #fff;
+}
+.page {
+  display: block;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
 }

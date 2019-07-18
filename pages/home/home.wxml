@@ -8,7 +8,7 @@
 </swiper>
 <!-- 房源查询 -->
 <view class="search">
-  <!-- 入住类型 -->
+  <!-- 入住类型 --> 
   <view class="search-rzlx">
     <view class="search-rzlx-item {{currentRzlx == 1 ? 'on' : ''}}" bindtap="selectRzlx" data-rzlx="1">
       <image src="{{currentRzlx == 1 ? qrImage + '_1.png' : qrImage + '.png'}}" class="search-item-icon" />全日
@@ -38,8 +38,8 @@
     <view bindtap="selectRzsj" class="search-rzsj-item-sj">
       <view class="search-rzsj-item-rz">入住</view>
       <view class="search-rzsj-item-rq">
-        <image src="{{calendarImage}}" class="search-item-icon" />{{rzsj}}          </view>
-      <view class="search-rzsj-item-week">{{rzsjWeek}} 14:00</view>
+        <image src="{{calendarImage}}" class="search-item-icon" />{{rzrq}}          </view>
+      <view class="search-rzsj-item-week">{{rzsjWeek}}{{rzsj}}</view>
     </view>
     <!-- 天数 -->
     <view class="search-rzsj-item-ts">
@@ -54,19 +54,19 @@
     <view bindtap="selectRzsj" class="search-rzsj-item-sj">
       <view class="search-rzsj-item-rz">离店</view>
       <view class="search-rzsj-item-rq">
-        <image src="{{calendarImage}}" class="search-item-icon" />{{ldsj}}        </view>
-      <view class="search-rzsj-item-week">{{ldsjWeek}} 12:00</view>
+        <image src="{{calendarImage}}" class="search-item-icon" />{{tfrq}}        </view>
+      <view class="search-rzsj-item-week">{{ldsjWeek}}{{tfsj}}</view>
     </view>
   </view>
 
   <!-- 时间开关 -->
   <view class="time-switch" hidden="{{currentRzlx != 2}}">
     <view class="time-switch-item">
-      <switch bindchange="switchChange" />
+      <switch bindchange="switchChange" data-sjlx="1"/>
       <view class="time-switch-item-desc">提前至20:00入住</view>
     </view>
     <view class="time-switch-item">
-      <switch bindchange="switchChange" />
+      <switch bindchange="switchChange" data-sjlx="2"/>
       <view class="time-switch-item-desc">延迟至12:00退房</view>
     </view>
     <view class="common-help" style="font-size:20rpx; margin-top:0px;">提前一小时入住许加收17元/延迟一小时退房需加收17元</view>
@@ -117,6 +117,6 @@
 <modalView show="{{showModal}}" clickMaskClose="{{clickMaskClose}}">
   <view class="calendar">
     <view class="calendar-cancel" bindtap="unSelectRzsj">取消</view>
-    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" startDate="2019-7-10" endDate="2019-9-10" />
+    <calendar cell-size="45" weeks-type="cn" active-type="square" binddayClick="handleSelectDate" moreDays="true" show-more-days="true" startDate="{{startDate}}" endDate="{{endDate}}" />
   </view>
 </modalView>

@@ -18,7 +18,17 @@ Page({
       { value: '1', name: '钱包支付' },
       { value: '2', name: '微信支付' }
     ],
-    fjs: 1
+    fjs: 1,
+    xychecked: false,
+    hyzk: 9,
+    yhqid: 1,
+    yhqje: util.parseDouble(20),
+    startDate: util.dateUtil.format(new Date(), 'Y-M-D'),
+    endDate: util.dateUtil.format(util.dateUtil.nextMonth(new Date(), 3), 'Y-M-D'),
+    rmbImage: '/resources/images/user/rmb.png',
+    circleImage: '/resources/images/circle.png',
+    selectedImage: '/resources/images/success-filling.png',
+    couponList: []
   },
 
   /**
@@ -30,25 +40,31 @@ Page({
       this.setData({
         ydsj: JSON.parse(options.ydsj)
       });
-      console.log(this.data.ydsj.rzsjDate);
+      console.log(this.data.ydsj);
       this.setData({
-        rzsj: this.data.ydsj.rzsj,
-        ldsj: this.data.ydsj.ldsj,
+        rzrq: this.data.ydsj.rzrq,
+        tfrq: this.data.ydsj.tfrq,
         rzts: this.data.ydsj.rzts,
         rzsjDate: this.data.ydsj.rzsjDate,
         ldsjDate: this.data.ydsj.ldsjDate,
         rzsjWeek: this.data.ydsj.rzsjWeek,
         ldsjWeek: this.data.ydsj.ldsjWeek,
+        rzlx: this.data.ydsj.rzlx,
+        rzsj: this.data.ydsj.rzsj,
+        tfsj: this.data.ydsj.tfsj
       })
     } else {
       this.setData({
-        rzsj: util.dateUtil.format(new Date(), 'M月D'),
-        ldsj: util.dateUtil.format(util.dateUtil.nextDay(), 'M月D'),
+        rzrq: util.dateUtil.format(new Date(), 'M月D'),
+        tfrq: util.dateUtil.format(util.dateUtil.nextDay(), 'M月D'),
         rzsjWeek: util.dateUtil.getDetail(new Date()).weekday,
         ldsjWeek: util.dateUtil.getDetail(util.dateUtil.nextDay()).weekday,
         rzts: '一天',
         rzsjDate: util.dateUtil.format(new Date(), 'Y-M-D'),
-        ldsjDate: util.dateUtil.format(util.dateUtil.nextDay(), 'Y-M-D')
+        ldsjDate: util.dateUtil.format(util.dateUtil.nextDay(), 'Y-M-D'),
+        rzlx: '1',
+        rzsj: ' 14:00:00',
+        tfsj: ' 12:00:00'
       })
     }
     // 设置酒店信息
@@ -67,8 +83,10 @@ Page({
       success: function (res) {
         that.setData({
           qbye: util.parseDouble(res.data.qbye),
-          id: res.data.id
+          vipid: res.data.id
         });
+        // 加载优惠券列表
+        that.loadCoupon();
       },
     });
 
@@ -103,8 +121,8 @@ Page({
     this.setData({
       ddyj: rzts * this.data.fjlx.fjjg,
       showModal: false,
-      rzsj: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
-      ldsj: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
+      rzrq: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
+      tfrq: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
       rzts: util.dateUtil.convertToChinaNum(rzts) + '天',
       rzsjDate: this.formaDate(dateStart),
       ldsjDate: this.formaDate(dateEnd),
@@ -129,7 +147,7 @@ Page({
         icon: 'none'
       })
       this.setData({
-        fjs: e.detail.num - 1
+        fjs: this.data.freeRomms
       })
     } else {
       this.setData({
@@ -157,7 +175,10 @@ Page({
         console.log(data);
         that.setData({
           fjlx: data,
-          ddyj: util.dateUtil.dateDiff(that.data.ldsjDate, that.data.rzsjDate) * data.fjjg
+          ddyj: util.parseDouble(util.dateUtil.dateDiff(that.data.ldsjDate, that.data.rzsjDate) * data.fjjg),
+        })
+        that.setData({
+          sfje: util.parseDouble(that.data.ddyj * that.data.hyzk / 10 - that.data.yhqje),
         })
       },
       function (data) {
@@ -181,7 +202,7 @@ Page({
           rzrxm: res.data.xm,
           rzrsjhm: res.data.sjhm,
           rzrlx: '1',
-          rzrid: that.data.id
+          rzrid: res.data.id
         });
       },
     })
@@ -235,8 +256,8 @@ Page({
       url: app.globalData.serverUrl + 'getFreeRooms',
       body: {
         fxid: this.data.fjlxid,
-        rzsj: this.data.rzsjDate + '14:00:00',
-        ldsj: this.data.ldsjDate + '12:00:00'
+        rzsj: this.data.rzsjDate + this.data.rzsj,
+        ldsj: this.data.ldsjDate + this.data.tfsj
       }
     }
     let that = this;
@@ -246,6 +267,176 @@ Page({
         console.log(data);
         that.setData({
           freeRomms: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
+  },
+
+  /**
+   * 点击同意协议事件
+   */
+  checked: function() {
+    this.setData({
+      xychecked: !this.data.xychecked
+    })
+  },
+
+  /**
+   * 提交订单
+   */
+  orderRoom: function() {
+    // 校验房间数
+    if (this.data.fjs > this.data.freeRomms) {
+      wx.showToast({
+        title: '剩余房间不足',
+        icon: 'none'
+      })
+      return;
+    }
+    // 校验比录项
+    if (!this.data.rzrxm) {
+      wx.showToast({
+        title: '入住人不能为空',
+        icon: 'none'
+      })
+      return;
+    }
+    if (!this.data.rzrsjhm) {
+      wx.showToast({
+        title: '手机号不能为空',
+        icon: 'none'
+      })
+      return;
+    }
+    if (!this.data.zffs) {
+      wx.showToast({
+        title: '请选择支付方式',
+        icon: 'none'
+      })
+      return;
+    }
+    if (this.data.zffs == '1' && this.data.qbye < this.data.ddyj) {
+      wx.showToast({
+        title: '钱包余额不足',
+        icon: 'none'
+      })
+      return;
+    }
+    if (!this.data.xychecked) {
+      wx.showToast({
+        title: '请阅读并同意租赁协议',
+        icon: 'none'
+      })
+      return;
+    }
+
+    let params = {
+      url: app.globalData.serverUrl + 'orderRoom',
+      body: {
+        fxid: this.data.fjlxid,
+        rzsj: this.data.rzsjDate + this.data.rzsj,
+        ldsj: this.data.ldsjDate + this.data.tfsj,
+        rzts: util.dateUtil.dateDiff(this.data.ldsjDate, this.data.rzsjDate),
+        ddyj: this.data.ddyj,
+        sfje: util.parseDouble(this.data.ddyj * this.data.hyzk / 10 - this.data.yhqje),
+        rzlx: this.data.rzlx == undefined ? '1' : this.data.rzlx,
+        rzrid: this.data.rzrid,
+        rzrlx: this.data.rzrlx,
+        xdrid: this.data.vipid,
+        rzrxm: this.data.rzrxm,
+        rzrsjhm: this.data.rzrsjhm,
+        zffs: this.data.zffs,
+        fjs: this.data.fjs,
+        memo: this.data.memo == undefined ? '' : this.data.memo,
+        ddzt: '1',
+        yhqid: this.data.yhqid,
+        yhqje: this.data.yhqje,
+        hyzk: this.data.hyzk,
+        hyzkje: this.data.ddyj * (10 - this.data.hyzk) / 10
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        console.log(data);
+        wx.showToast({
+          title: '生成订单成功',
+          icon: 'none',
+          success: function() {
+            wx.navigateTo({
+              url: '/pages/order/order',
+            })
+          }
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
+  },
+
+  /**
+   * 选择优惠券
+   */
+  showSelectCoupon: function() {
+    this.setData({
+      showYhqModal: true
+    })
+  },
+
+  /**
+   * 取消选择优惠券
+   */
+  unSelectCoupon: function() {
+    this.setData({
+      showYhqModal: false
+    })
+  },
+
+  /**
+   * 选择优惠券
+   */
+  selectCoupon: function (e) {
+    this.setData({
+      selectCouponIndex: e.currentTarget.dataset.index,
+      showYhqModal: false,
+      yhqid: this.data.couponList[e.currentTarget.dataset.index].id,
+      yhqje: this.data.couponList[e.currentTarget.dataset.index].yhqje,
+    });
+  },
+
+  /**
+   * 加载优惠券列表
+   */
+  loadCoupon: function(e) {
+    let params = {
+      url: app.globalData.serverUrl + 'getCoupons',
+      body: {
+        userid: this.data.vipid,
+        yhqzt: '1',
+        yxqq: util.dateUtil.format(new Date(), 'Y-M-D H:F:S'),
+        yxqz: util.dateUtil.format(new Date(), 'Y-M-D H:F:S')
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        console.log(data);
+        that.setData({
+          couponList: data,
+          selectCouponIndex: 0,
+          yhqje: data[0].yhqje
         })
       },
       function (data) {

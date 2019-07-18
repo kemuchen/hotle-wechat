@@ -1,3 +1,7 @@
 {
-  "usingComponents": {"tab": "/components/tab/tab"}
+  "usingComponents": {
+    "tab": "/components/tab/tab",
+    "calendar": "/components/calendar/calendar",
+    "modalView": "/components/modal/modal"
+  }
 }

@@ -1,4 +1,8 @@
 // pages/order/order.js
+const util = require('../../utils/util.js')
+const request = require('../../utils/request.js')
+var app = getApp();
+
 Page({
 
   /**
@@ -28,47 +32,50 @@ Page({
         name: '待评价'
       }
     ],
-    orderList: [
-      {
-        fjmc: '精致大床房',
-        ddzt: '已取消',
-        rzsj: '06/27',
-        ldsj: '06/28',
-        lc: '17',
-        fjh: '1729',
-        sfje: '0.00'
-      }, {
-        fjmc: '精致大床房',
-        ddzt: '已取消',
-        rzsj: '06/27',
-        ldsj: '06/28',
-        lc: '17',
-        fjh: '1729',
-        sfje: '0.00'
-      }, {
-        fjmc: '精致大床房',
-        ddzt: '已取消',
-        rzsj: '06/27',
-        ldsj: '06/28',
-        lc: '17',
-        fjh: '1729',
-        sfje: '0.00'
-      }
-    ]
+    orderList: [],
+    // 自定义page对象CSS样式对象
+    pageBackgroundColor: '#f5f5f5'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.getStorage({
+      key: 'vipInfo',
+      success: function(res) {
+        if (res.data) {
+          that.setData({
+            userid: res.data.id
+          })
+          // 加载全部订单
+          that.loadOrders('');
+        } else {
+          wx.showToast({
+            title: '请先登录',
+            icon: 'none'
+          })
+        }
+      },
+    })
   },
 
   /**
    * 切换tab页
    */
   swichNav: function(e) {
-    console.log(e.detail.currentTab);
+    if (e.detail.currentTab == 1) {
+      this.loadOrders('');
+      this.setData({
+        tabname: ''
+      })
+    } else {
+      this.loadOrders(e.detail.currentTab - 1);
+      this.setData({
+        tabname: this.data.tabList[e.detail.currentTab - 1].name
+      })
+    }
   },
 
   /**
@@ -87,5 +94,50 @@ Page({
     wx.navigateTo({
       url: '/pages/home/fjyd/fjyd',
     })
+  },
+
+  /**
+   * 跳转到查询界面
+   */
+  navigateToSearch: function() {
+    util.navigateTo('/pages/home/search/search', true);
+  },
+
+  /**
+   * 根据订单状态加载订单信息
+   */
+  loadOrders: function(ddzt) {
+    let params = {
+      url: app.globalData.serverUrl + 'getOrders',
+      body: {
+        ddzt: ddzt,
+        xdrid: this.data.userid
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        console.log(data);
+        that.setData({
+          orderList: data
+        })
+        if (that.data.orderList.length == 0) {
+          that.setData({
+            pageBackgroundColor: '#fff;'
+          })
+        } else {
+          that.setData({
+            pageBackgroundColor: '#f5f5f5;'
+          })
+        }
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
   }
 })

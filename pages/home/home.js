@@ -25,7 +25,11 @@ Page({
     showModal: false,
     tjfyList: [],
     currentRzlx: 1,
-    clickMaskClose: false
+    clickMaskClose: false,
+    startDate: util.dateUtil.format(new Date(), 'Y-M-D'),
+    endDate: util.dateUtil.format(util.dateUtil.nextMonth(new Date(), 3), 'Y-M-D'),
+    rzsj: ' 14:00:00',   // 入住时间
+    tfsj: ' 12:00:00'    // 退房时间
   },
 
   /**
@@ -38,13 +42,13 @@ Page({
     this.getLocation();
 
     this.setData({
-      rzsj: util.dateUtil.format(new Date(), 'M月D'),
-      ldsj: util.dateUtil.format(util.dateUtil.nextDay(), 'M月D'),
+      rzrq: util.dateUtil.format(new Date(), 'M月D'),
+      tfrq: util.dateUtil.format(util.dateUtil.nextDay(), 'M月D'),
       rzsjWeek: util.dateUtil.getDetail(new Date()).weekday,
       ldsjWeek: util.dateUtil.getDetail(util.dateUtil.nextDay()).weekday,
       rzts: '一天',
       rzsjDate: util.dateUtil.format(new Date(), 'Y-M-D'),
-      ldsjDate: util.dateUtil.format(util.dateUtil.nextDay(), 'Y-M-D')
+      ldsjDate: util.dateUtil.format(util.dateUtil.nextDay(), 'Y-M-D'),
     })
   },
 
@@ -73,8 +77,8 @@ Page({
     let rzts = util.dateUtil.dateDiff(this.formaDate(dateEnd), this.formaDate(dateStart));
     this.setData({
       showModal: false,
-      rzsj: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
-      ldsj: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
+      rzrq: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
+      tfrq: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
       rzts: util.dateUtil.convertToChinaNum(rzts) + '天',
       rzsjDate: this.formaDate(dateStart),
       ldsjDate: this.formaDate(dateEnd),
@@ -93,13 +97,16 @@ Page({
    */
   searchRoom: function() {
     var params = {
-      rzsj: this.data.rzsj,
-      ldsj: this.data.ldsj,
+      rzrq: this.data.rzrq,
+      tfrq: this.data.tfrq,
       rzts: this.data.rzts,
       rzsjDate: this.data.rzsjDate,
       ldsjDate: this.data.ldsjDate,
       rzsjWeek: this.data.rzsjWeek,
-      ldsjWeek: this.data.ldsjWeek
+      ldsjWeek: this.data.ldsjWeek,
+      rzlx: this.data.currentRzlx,
+      rzsj: this.data.rzsj,
+      tfsj: this.data.tfsj
     }
     console.log(params);
     util.navigateTo('/pages/home/search/search?ydsj=' + JSON.stringify(params), true);
@@ -109,9 +116,35 @@ Page({
    * 选择入住类型
    */
   selectRzlx: function(e) {
+    if (e.currentTarget.dataset.rzlx == 1) {
+      this.setData({
+        rzsj: ' 14:00:00',
+        tfsj: ' 12:00:00'
+      })
+    } else if (e.currentTarget.dataset.rzlx == 2) {
+      this.setData({
+        rzsj: ' 22:00:00',
+        tfsj: ' 10:00:00'
+      })
+    }
     this.setData({
       currentRzlx: e.currentTarget.dataset.rzlx
     });
+  },
+
+  /**
+   * 开关点击事件
+   */
+  switchChange: function(e) {
+    if (e.currentTarget.dataset.sjlx == 1) {
+      this.setData({
+        rzsj: e.detail.value ? ' 20:00:00' : ' 22:00:00'
+      })
+    } else if (e.currentTarget.dataset.sjlx == 2) {
+      this.setData({
+        tfsj: e.detail.value ? ' 12:00:00' : ' 10:00:00'
+      })
+    } 
   },
 
   /**
