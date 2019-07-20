@@ -1,8 +1,4 @@
 /* pages/personal/coupon/coupon.wxss */
-Page{
-  background-color: #f5f5f5;
-}
-
 .coupon-item {
   width: 90%;
   height: 80px;

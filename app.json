@@ -19,7 +19,8 @@
     "pages/service/sqqj/sqqj",
     "pages/service/czmm/czmm",
     "pages/home/webview/webview",
-    "pages/personal/login/login"
+    "pages/personal/login/login",
+    "pages/service/zzfw/zzfw"
   ],
   "window": {
     "backgroundTextStyle": "light",

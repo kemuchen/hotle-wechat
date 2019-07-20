@@ -1,7 +1,7 @@
 <!--pages/service/service.wxml-->
 <!-- 无可入住房间 -->
 <view class="container">
-  <view class="no-room">
+  <view class="no-room" hidden="{{drzList.length != 0 || rzzList.length != 0}}">
     <view class="top-line">
       <!-- 全部订单 -->
       <view class="all-orders" bindtap="navigateToOrder">
@@ -21,7 +21,7 @@
     </button>
   </view>
 
-  <view class="no-room">
+  <view class="no-room" wx:for="{{drzList}}">
     <view class="top-line">
       <!-- 全部订单 -->
       <view class="all-orders" bindtap="navigateToOrder">
@@ -34,29 +34,34 @@
 
     <!-- 暂无可入住信息 -->
     <view class="no-adviced-room">您即将入住</view>
-    <view class="no-adviced-room">梦幻珊瑚-智能套房201（原价288元）</view>
-    <view class="no-adviced-room" style="font-size: 20rpx;">入离时间：06.29 22:24-06.30 12:00</view>
+    <view class="no-adviced-room">{{item.name}}-{{item.fjlx}}（原价{{item.ddyj}}元）</view>
+    <view class="no-adviced-room" style="font-size: 20rpx;">入离时间：{{item.rzsj}}-{{item.ldsj}}</view>
 
     <!-- 预定房间 -->
-    <button class="advince-room" bindtap="navigateToBlrz">
+    <button class="advince-room" bindtap="navigateToBlrz" data-orderid="{{item.orderid}}">
       办理入住
     </button>
   </view>
 
-  <!-- 智能开门 -->
-  <view class="znkm-box">
-    <view class="znkm-title">
-      <view class="znkm-title-text">智能开门</view>
-      <view class="znkm-title-tips">您尚未办理入住，入住后可使用智能开门</view>
+  <view class="no-room" wx:for="{{rzzList}}">
+    <view class="top-line">
+      <!-- 全部订单 -->
+      <view class="all-orders" bindtap="navigateToOrder">
+        <view>
+          <image class="order-image" src="{{orderImg}}"></image>
+        </view>
+        <view class="all-orders-text">全部订单</view>
+      </view>
     </view>
-    <gongge routers="{{znkmRoutes}}" columns="4"></gongge>
-  </view>
 
-  <!-- 在住服务 -->
-  <view class="znkm-box">
-    <view class="znkm-title">
-      <view class="znkm-title-text">在住服务</view>
-    </view>
-    <gongge routers="{{zzfwRouters}}" columns="3" bindclickItem="clickZzfwItem"></gongge>
+    <!-- 暂无可入住信息 -->
+    <view class="no-adviced-room">您已入住</view>
+    <view class="no-adviced-room">{{item.name}}-{{item.fjlx}}（原价{{item.ddyj}}元）</view>
+    <view class="no-adviced-room" style="font-size: 20rpx;">入离时间：{{item.rzsj}}-{{item.ldsj}}</view>
+
+    <!-- 预定房间 -->
+    <button class="advince-room" bindtap="navigateToZzfw" data-orderid="{{item.orderid}}">
+      在住服务
+    </button>
   </view>
 </view>

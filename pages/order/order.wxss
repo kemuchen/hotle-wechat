@@ -86,15 +86,15 @@ page{
 }
 
 .order-item-oper {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
   margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .order-item-oper-btn {
   margin-right: 10px;
   margin-bottom: 10px;
+  width: 80px;
   height: 25px;
   border: 1px solid #8a8a8a;
   color: #8a8a8a;

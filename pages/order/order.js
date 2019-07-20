@@ -90,7 +90,7 @@ Page({
   /**
    * 跳转到预定界面
    */
-  navigateToOrder: function() {
+  navigateToOrder: function(e) {
     wx.navigateTo({
       url: '/pages/home/fjyd/fjyd',
     })
@@ -101,6 +101,24 @@ Page({
    */
   navigateToSearch: function() {
     util.navigateTo('/pages/home/search/search', true);
+  },
+
+  /**
+   * 跳转到办理入住界面
+   */
+  navigateToBlrz: function (e) {
+    wx.navigateTo({
+      url: '/pages/service/blrz/blrz?orderid=' + e.currentTarget.dataset.orderid,
+    })
+  },
+
+  /**
+   * 跳转到在住服务界面
+   */
+  navigateToZzfw: function (e) {
+    wx.navigateTo({
+      url: '/pages/service/zzfw/zzfw?orderid=' + e.currentTarget.dataset.orderid,
+    })
   },
 
   /**
@@ -139,5 +157,12 @@ Page({
         })
       }
     )
+  },
+
+  /**
+   * 
+   */
+  navigateToPay: function(e) {
+    
   }
 })

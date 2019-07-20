@@ -67,14 +67,20 @@ Page({
         tfsj: ' 12:00:00'
       })
     }
-    // 设置酒店信息
-    this.setData({
-      fjlxid: options.fjlxid,
-      hotel: JSON.parse(options.hotel)
-    });
 
-    // 加载酒店房型信息
-    this.loadFjlxxx();
+    if (options.hotel) {
+      // 设置酒店信息
+      this.setData({
+        fjlxid: options.fjlxid,
+        hotel: JSON.parse(options.hotel)
+      });
+      // 加载酒店房型信息
+      this.loadFjlxxx();
+    }
+    
+
+    // 如果存在orderid则说明为再次预定或者续住
+    
 
     // 获取vip信息
     var that = this;
@@ -369,11 +375,6 @@ Page({
         wx.showToast({
           title: '生成订单成功',
           icon: 'none',
-          success: function() {
-            wx.navigateTo({
-              url: '/pages/order/order',
-            })
-          }
         })
       },
       function (data) {
