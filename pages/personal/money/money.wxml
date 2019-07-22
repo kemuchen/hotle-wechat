@@ -18,7 +18,7 @@
     </view>
   </view>
 
-  <!-- 充值金额 -->
+  <!-- 充值金额 --> 
   <view class="czje-box">
     <view class="czje {{currentJe==500 ? 'on' : ''}}" bindtap="selectJe" data-number="500">
       <view class="czje-number">￥500</view>
@@ -51,7 +51,7 @@
 
   <!-- 充值按钮 -->
   <view class="cz-btn-box">
-    <button class="cz-btn">立即充值</button>
+    <button class="cz-btn" bindtap="qbcz">立即充值</button>
   </view>
 </view>
 

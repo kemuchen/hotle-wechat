@@ -34,7 +34,8 @@ Page({
     ],
     orderList: [],
     // 自定义page对象CSS样式对象
-    pageBackgroundColor: '#f5f5f5'
+    pageBackgroundColor: '#f5f5f5',
+    showModal: false
   },
 
   /**
@@ -163,6 +164,8 @@ Page({
    * 
    */
   navigateToPay: function(e) {
-    
+    this.setData({
+      showModal: true
+    })
   }
 })

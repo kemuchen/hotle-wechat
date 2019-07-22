@@ -28,6 +28,19 @@
   border-radius: 5px;
 }
 
+.common-btn-disabled {
+  width: 90%;
+  color: #ffffff;
+  height: 35px;
+  margin-top: 10px;
+  font-size: 35rpx;
+  background-color: #8a8a8a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
 .common-btn-nofilling {
   width: 90%;
   color: #ea9518;

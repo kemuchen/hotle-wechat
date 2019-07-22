@@ -63,7 +63,7 @@
     </view>
     <view class="zffw-item">
       <image src="" class="zffw-item-image"></image>
-      钱包支付
+      <view>钱包支付</view>
     </view>
   </view>
 </modalView>

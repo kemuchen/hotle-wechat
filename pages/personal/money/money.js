@@ -1,4 +1,7 @@
 // pages/personal/money/money.js
+const util = require('../../../utils/util.js')
+const request = require('../../../utils/request.js')
+var app = getApp();
 Page({
 
   /**
@@ -15,7 +18,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 获取vip信息
+    var that = this;
+    wx.getStorage({
+      key: 'vipInfo',
+      success: function (res) {
+        that.setData({
+          vipid: res.data.id
+        });
+        // 加载钱包消费记录
+        that.loadQbxfjl();
+      },
+    });
   },
 
   /**
@@ -29,5 +43,69 @@ Page({
     this.setData({
       currentJe: czje
     });
+  },
+
+  /**
+   * 钱包充值
+   */
+  qbcz: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'addConsume',
+      body: {
+        vipid: this.data.vipid,
+        xfje: this.data.currentJe,
+        sflx: '2',
+        xfqye: this.data.xfqye
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        wx.showToast({
+          title: '充值成功',
+          icon: 'none'
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
+  },
+
+  /**
+   * 加载最新一条钱包消费记录
+   */
+  loadQbxfjl: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'selectLatestConsume',
+      body: {
+        vipid: this.data.vipid
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        if (data == undefined || data.id == undefined) {
+          that.setData({
+            xfqye: 0
+          })
+        } else {
+          that.setData({
+            xfqye: data.xfqye
+          })
+        }
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
   }
 })

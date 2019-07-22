@@ -3,18 +3,11 @@
 <view class="cyrzr-list-title">常用入住人</view>
 <!-- 常用入住人列表 -->
 <view class="ryrzr-list">
-  <view class="cyrzr-list-item">
-    <image src="" class="select-icon"></image>
-    <text class="cyrzr-list-item-text">张三 18207173275</text>
-  </view>
-  <view class="cyrzr-list-item">
-    <image src="" class="select-icon"></image>
-    <text class="cyrzr-list-item-text">张三 18207173275</text>
-  </view>
-  <view class="cyrzr-list-item">
-    <image src="" class="select-icon"></image>
-    <text class="cyrzr-list-item-text">张三 18207173275</text>
+  <view class="cyrzr-list-item" wx:for="{{cyrzrList}}" bindtap="select" data-index="{{index}}">
+    <!-- 选择 -->
+    <image wx:if="{{showSelect}}" src="{{selectCyrzrIndex == index ? selectedImage : circleImage}}" class="select-all-image"></image>
+    <text class="cyrzr-list-item-text">{{item.rzrxm}}   {{item.sjhm}}</text>
   </view>
 </view>
 
-<button class="common-btn" style="position: absolute; bottom: 10px; left: 5%;">确定</button>
+<button wx:if="{{showSelect}}" class="common-btn" style="position: absolute; bottom: 10px; left: 5%;" bindtap="selectCyrzr">确定</button>

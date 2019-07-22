@@ -313,6 +313,104 @@ var parseDouble = function(num) {
   num += '00'; //在字符串末尾补零  
   num = num.match(/\d+\.\d{2}/)[0];
   return num;
+};
+
+
+/**
+ * 身份证
+ */
+var CardIDUtil = {
+  cityAreaId: {
+    11: "北京",
+    12: "天津",
+    13: "河北",
+    14: "山西",
+    15: "内蒙古",
+    21: "辽宁",
+    22: "吉林",
+    23: "黑龙江",
+    31: "上海",
+    32: "江苏",
+    33: "浙江",
+    34: "安徽",
+    35: "福建",
+    36: "江西",
+    37: "山东",
+    41: "河南",
+    42: "湖北",
+    43: "湖南",
+    44: "广东",
+    45: "广西",
+    46: "海南",
+    50: "重庆",
+    51: "四川",
+    52: "贵州",
+    53: "云南",
+    54: "西藏",
+    61: "陕西",
+    62: "甘肃",
+    63: "青海",
+    64: "宁夏",
+    65: "新疆",
+    71: "台湾",
+    81: "香港",
+    82: "澳门",
+    91: "国外"
+  },
+  birthday: "",
+  sex: "",
+  /**
+   * 根据校验码验证身份证号是否存在
+   * @param param  身份证号
+   * @returns {*}
+   */
+  cardIdIsExist: function(param) {
+    var iSum = 0;
+    var weight = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+    var validate = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+    for (var i = 0; i < param.length - 1; i++) {
+      iSum += param.charAt(i) * weight[i];
+    }
+    var mode = iSum % 11;
+    if (param.charAt(param.length - 1) != validate[mode]) {
+      return "你输入的身份证不合法";
+    } else {
+      if (param.charAt(param.length - 2) % 2 == 0) {
+        this.sex = "1"; //女
+      } else {
+        this.sex = "0"; //男
+      }
+    }
+    return true;
+
+    /* }*/
+  },
+
+  /**
+   * 验证用户输入的身份证号
+   * @param param 身份证号
+   * @returns {*}
+   */
+  verification: function(param) {
+    if (!/^\d{17}(\d|x)$/i.test(param)) {
+      if (!InputText.nonEmpty(param)) {
+        return "你输入的身份证不合法";
+      }
+      return "你输入的身份证不合法";
+    } else if (this.cityAreaId[parseInt(param.substr(0, 2))] == null) {
+      return "你输入的身份证不合法";
+    } else {
+      var birthday = param.substr(6, 4) + "-" + Number(param.substr(10, 2)) + "-" + Number(param.substr(12, 2));
+      var date = new Date(birthday.replace(/-/g, "/"));
+      this.birthday = date;
+      if (birthday != (date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate())) {
+        return "你输入的身份证不合法";
+      } else {
+        this.birthday = birthday;
+      }
+      return this.cardIdIsExist(param);
+    }
+  }
 }
 
 module.exports = {
@@ -320,5 +418,6 @@ module.exports = {
   getBiggerzIndex: getBiggerzIndex,
   dateUtil: dateUtil,
   navigateTo: navigateTo,
-  parseDouble: parseDouble
+  parseDouble: parseDouble,
+  cardIDUtil: CardIDUtil
 }

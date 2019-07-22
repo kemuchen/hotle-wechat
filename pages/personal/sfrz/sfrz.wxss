@@ -13,6 +13,11 @@ Page {
   margin-bottom: 10px;
 }
 
+.zjsc-image {
+  width: 100%;
+  height: 100%;
+}
+
 .zjsc-camera {
   width: 60px;
   height: 60px;
@@ -26,4 +31,27 @@ Page {
 .zjsc-camera-image {
   width: 40px;
   height: 40px;
+}
+.input-list {
+  width: 100%;
+}
+
+.input-list-item {
+  width: 100%;
+  height: 40px;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.input-title {
+  margin-left: 10px;
+  color: #000;
+}
+
+.input-box {
+  margin-right: 10px;
+  text-align: right;
 }

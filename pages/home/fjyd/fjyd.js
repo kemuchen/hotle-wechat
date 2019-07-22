@@ -218,7 +218,9 @@ Page({
    * 选择入住人
    */
   selectRzr: function() {
-
+    wx.navigateTo({
+      url: '/pages/personal/cyrzr/cyrzr?showSelect=true',
+    })
   },
 
   /**
