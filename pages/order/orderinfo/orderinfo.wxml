@@ -9,8 +9,8 @@
 <view class="fjxx-box">
   <image src="/resources/images/1.jpg" class="fjxx-image"></image>
   <view class="fjxx-info">
-    <view class="fjxx-info-title">智慧公寓十堰店-新青年智能空调房</view>
-    <view class="fjxx-info-desc">商务标间 不含早餐 双床 有窗</view>
+    <view class="fjxx-info-title">{{hotel.name}}-{{fjlx}}</view>
+    <view class="fjxx-info-fjdz">{{hotel.city}}{{hotel.area}}{{hotel.street}}{{hotel.address}}</view>
   </view>
 </view>
 
@@ -40,19 +40,19 @@
   </view>
 </view>
 <!-- 房间地址 --->
-<view class="fjdz-box">
+<view class="fjdz-box" wx:for="{{roomList}}">
   <view class="fjdz-item-50">
     <text class="fjdz-item-label">楼层：</text>
-    <text class="fjdz-item-text">17</text>
+    <text class="fjdz-item-text">{{item.lc}}</text>
   </view>
   <view class="fjdz-item-50">
     <text class="fjdz-item-label">房号：</text>
-    <text class="fjdz-item-text">1729</text>
+    <text class="fjdz-item-text">{{item.fjh}}</text>
   </view>
-  <view class="fjdz-item-100">
-    <text class="fjdz-item-label">地址：</text>
-    <text class="fjdz-item-text">湖北省十堰市茅箭区某某路1238号</text>
-  </view>
+</view>
+<view class="fjdz-item-100">
+  <text class="fjdz-item-label">地址：</text>
+  <text class="fjdz-item-text">{{hotel.city}}{{hotel.area}}{{hotel.street}}{{hotel.address}}</text>
 </view>
 <!-- 订单信息 -->
 <view class="fjdz-box" style="margin-top: 10px;">

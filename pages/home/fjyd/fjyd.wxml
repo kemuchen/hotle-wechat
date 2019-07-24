@@ -13,7 +13,7 @@
   <view class="fjxx-box">
     <image src="/resources/images/1.jpg" class="fjxx-image"></image>
     <view class="fjxx-info">
-      <view class="fjxx-info-fjmc">{{hotel.name}}</view>
+      <view class="fjxx-info-fjmc">{{hotel.name}}-{{fjlx}}</view>
       <view class="fjxx-info-fjdz">{{hotel.city}}{{hotel.area}}{{hotel.street}}{{hotel.address}}</view>
       <view class="fjxx-info-score">
         <image src="{{item.score >= 1 ? wjxFillingIcon : wjxIcon}}" class="fjxx-info-icon"></image>
@@ -153,7 +153,7 @@
 <modalView show="{{showYhqModal}}" clickMaskClose="{{clickMaskClose}}">
   <view class="coupon-box">
     <view class="calendar-cancel" bindtap="unSelectCoupon">取消</view>
-    <view class="coupon-item" wx:for="{{couponList}}" bindtap="selectCoupon" data-index="{{index}}">
+    <view class="coupon-item" wx:for="{{couponList}}" wx:key="unique" bindtap="selectCoupon" data-index="{{index}}">
       <!-- 左侧优惠券信息 -->
       <view class="coupon-item-info-box">
         <view class="coupon-item-info-box-child">

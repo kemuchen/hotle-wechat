@@ -33,6 +33,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       roomListHeight: wx.getSystemInfoSync().windowHeight - 101.5,
+      cityName: app.globalData.user.address.city
     })
     // 如果存在入住时间则设置入住时间
     if (options.ydsj) {
@@ -50,7 +51,8 @@ Page({
         ldsjWeek: this.data.ydsj.ldsjWeek,
         rzlx: this.data.ydsj.rzlx,
         rzsj: this.data.ydsj.rzsj,
-        tfsj: this.data.ydsj.tfsj
+        tfsj: this.data.ydsj.tfsj,
+        rztsNum: this.data.ydsj.rztsNum
       })
     } else {
       this.setData({
@@ -62,11 +64,18 @@ Page({
         rzsjDate: util.dateUtil.format(new Date(), 'Y-M-D'),
         ldsjDate: util.dateUtil.format(util.dateUtil.nextDay(), 'Y-M-D'),
         rzlx: '1',
+        rztsNum: 1,
         rzsj: ' 14:00:00',
         tfsj: ' 12:00:00'
       })
     }
-    this.loadSxfy();
+    this.loadSxfy({
+      detail: {
+        conditions: ''
+      }
+    });
+    // 加载城市信息
+    this.loadArea();
   },
 
   /**
@@ -96,7 +105,8 @@ Page({
       ldsjWeek: this.data.ldsjWeek,
       rzlx: this.data.rzlx,
       rzsj: this.data.rzsj,
-      tfsj: this.data.tfsj
+      tfsj: this.data.tfsj,
+      rztsNum: this.data.rztsNum
     }
     wx.navigateTo({
       url: '/pages/home/fjxq/fjxq?ydsj=' + JSON.stringify(params) + '&hotelid=' + e.currentTarget.dataset.hotelid,
@@ -106,10 +116,12 @@ Page({
   /**
    * 加载推荐房源
    */
-  loadSxfy: function () {
+  loadSxfy: function (e) {
     let params = {
       url: app.globalData.serverUrl + 'getHotels',
-      body: {}
+      body: {
+        conditions: e.detail.conditions
+      }
     }
     let that = this;
     request.doRequest(
@@ -152,6 +164,7 @@ Page({
     let dateEnd = e.detail.dateEnd;
     let rzts = util.dateUtil.dateDiff(this.formaDate(dateEnd), this.formaDate(dateStart));
     this.setData({
+      rztsNum: rzts,
       showModal: false,
       rzrq: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
       tfrq: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
@@ -167,4 +180,40 @@ Page({
   formaDate: function (date) {
     return util.dateUtil.formatNum(date.year) + '-' + util.dateUtil.formatNum(date.month) + '-' + util.dateUtil.formatNum(date.day)
   },
+
+  /**
+   * 显示
+   */
+  showCity: function() {
+    wx.navigateTo({
+      url: '/pages/home/selectcity/selectcity',
+    })
+  },
+
+  /**
+   * 加载城市区划信息
+   */
+  loadArea: function() {
+    let params = {
+      url: app.globalData.serverUrl + 'getXzqhs',
+      body: {
+        parentname: this.data.cityName
+      }
+    }
+    let that = this;
+    request.doRequest(
+      params,
+      function (data) {
+        that.setData({
+          areaList: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
+  }
 })

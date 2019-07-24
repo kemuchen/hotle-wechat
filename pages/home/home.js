@@ -47,6 +47,7 @@ Page({
       rzsjWeek: util.dateUtil.getDetail(new Date()).weekday,
       ldsjWeek: util.dateUtil.getDetail(util.dateUtil.nextDay()).weekday,
       rzts: '一天',
+      rztsNum: 1,
       rzsjDate: util.dateUtil.format(new Date(), 'Y-M-D'),
       ldsjDate: util.dateUtil.format(util.dateUtil.nextDay(), 'Y-M-D'),
     })
@@ -77,6 +78,7 @@ Page({
     let rzts = util.dateUtil.dateDiff(this.formaDate(dateEnd), this.formaDate(dateStart));
     this.setData({
       showModal: false,
+      rztsNum: rzts,
       rzrq: util.dateUtil.formatNum(dateStart.month) + '月' + util.dateUtil.formatNum(dateStart.day) + '日',
       tfrq: util.dateUtil.formatNum(dateEnd.month) + '月' + util.dateUtil.formatNum(dateEnd.day) + '日',
       rzts: util.dateUtil.convertToChinaNum(rzts) + '天',
@@ -106,7 +108,8 @@ Page({
       ldsjWeek: this.data.ldsjWeek,
       rzlx: this.data.currentRzlx,
       rzsj: this.data.rzsj,
-      tfsj: this.data.tfsj
+      tfsj: this.data.tfsj,
+      rztsNum: this.data.rztsNum
     }
     console.log(params);
     util.navigateTo('/pages/home/search/search?ydsj=' + JSON.stringify(params), true);

@@ -19,6 +19,14 @@ Component({
       type: Boolean,
       value: true,
       observer: '_setClickMaskClose'
+    },
+    top: {
+      type: Number,
+      value: 0
+    },
+    bottom: {
+      type: Number,
+      value: 0
     }
   },
 
@@ -27,7 +35,9 @@ Component({
    */
   data: {
     clickMaskClose: true,
-    show: false
+    show: false,
+    top: 0,
+    bottom: 0
   },
 
   /**

@@ -21,7 +21,7 @@
     </button>
   </view>
 
-  <view class="no-room" wx:for="{{drzList}}">
+  <view class="no-room" wx:for="{{drzList}}" wx:key="unique">
     <view class="top-line">
       <!-- 全部订单 -->
       <view class="all-orders" bindtap="navigateToOrder">
@@ -43,7 +43,7 @@
     </button>
   </view>
 
-  <view class="no-room" wx:for="{{rzzList}}">
+  <view class="no-room" wx:for="{{rzzList}}" wx:key="unique">
     <view class="top-line">
       <!-- 全部订单 -->
       <view class="all-orders" bindtap="navigateToOrder">

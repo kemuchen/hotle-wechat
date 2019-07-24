@@ -302,6 +302,7 @@ var navigateTo = function(url, isCheckLogin) {
 };
 
 var parseDouble = function(num) {
+  if (num < 0) num = 0;
   num += '';
   num = num.replace(/[^0-9|\.]/g, ''); //清除字符串中的非数字非.字符  
   if (/^0+/) //清除字符串开头的0  

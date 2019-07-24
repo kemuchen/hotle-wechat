@@ -8,7 +8,7 @@
       </view>
       <view class="money-ye-info">
         <view class="money-ye-info-text">我的余额</view>
-        <view class="money-ye-info-number">￥ 0.00</view>
+        <view class="money-ye-info-number">￥ {{vipInfo.qbye}}</view>
       </view>
     </view>
 

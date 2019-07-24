@@ -5,8 +5,8 @@
     <button open-type="getUserInfo" class="login-btn" bindgetuserinfo="login">登录</button>
   </view>
   <block wx:else>
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-    <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+    <image class="userinfo-avatar" src="{{vipInfo.tx}}" mode="cover"></image>
+    <view class="userinfo-nickname">{{vipInfo.xm}}</view>
   </block>
 </view>
 
@@ -56,7 +56,8 @@
         </view>
       </view>
       <view class="my-fortune-item-number">
-        <text class="my-fortune-item-number-text">0.00</text>
+        <text wx:if="{{vipInfo != undefined}}" class="my-fortune-item-number-text">{{vipInfo.qbye}}</text>
+        <text wx:if="{{vipInfo == undefined}}" class="my-fortune-item-number-text">0.00</text>
         <text class="my-fortune-item-number-sub">元</text>
       </view>
     </view>
@@ -72,7 +73,8 @@
         </view>
       </view>
       <view class="my-fortune-item-number">
-        <text class="my-fortune-item-number-text">9</text>
+        <text wx:if="{{vipInfo != undefined}}" class="my-fortune-item-number-text">{{vipInfo.coupons}}</text>
+        <text wx:if="{{vipInfo == undefined}}" class="my-fortune-item-number-text">0</text>
         <text class="my-fortune-item-number-sub">张</text>
       </view>
     </view>

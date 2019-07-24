@@ -24,7 +24,7 @@ Page({
       key: 'vipInfo',
       success: function (res) {
         that.setData({
-          vipid: res.data.id
+          vipInfo: res.data
         });
         // 加载钱包消费记录
         that.loadQbxfjl();
@@ -52,9 +52,9 @@ Page({
     let params = {
       url: app.globalData.serverUrl + 'addConsume',
       body: {
-        vipid: this.data.vipid,
+        vipid: this.data.vipInfo.id,
         xfje: this.data.currentJe,
-        sflx: '2',
+        xflx: '2',
         xfqye: this.data.xfqye
       }
     }
@@ -83,7 +83,7 @@ Page({
     let params = {
       url: app.globalData.serverUrl + 'selectLatestConsume',
       body: {
-        vipid: this.data.vipid
+        vipid: this.data.vipInfo.id
       }
     }
     let that = this;

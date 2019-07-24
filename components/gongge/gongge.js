@@ -6,7 +6,7 @@ Component({
       value: [],
       observer: '_setRouters'
     },
-
+ 
     /**
      * 宫格列数，即一行显示几列
      */

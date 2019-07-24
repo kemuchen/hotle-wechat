@@ -20,7 +20,8 @@
     "pages/service/czmm/czmm",
     "pages/home/webview/webview",
     "pages/personal/login/login",
-    "pages/service/zzfw/zzfw"
+    "pages/service/zzfw/zzfw",
+    "pages/home/selectcity/selectcity"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -4,8 +4,8 @@
 
 <!-- 搜索框 -->
 <view class="search">
-  <view class="search-box">
-    <view class="search-box-add">十堰市</view>
+  <view class="searchbox">
+    <view class="search-box-add" bindtap="showCity">{{cityName}}</view>
     <view class="triangle-down"></view>
     <view class="search-box-splid"> | </view>
     <image src="{{searchImage}}" class="search-icon"></image>
@@ -13,15 +13,9 @@
   </view>
 </view>
 
-<!-- 排序条件 -->
-<view class="order-condition">
-  <view class="order-condition-item" bindtap="selectRzsj">{{rzrq}}-{{tfrq}}<view class="triangle-down"></view></view>
-  <view class="order-condition-item">区域<view class="triangle-down"></view></view>
-  <view class="order-condition-item">推荐排序<view class="triangle-down"></view></view>
-  <view class="order-condition-item">门店选房<view class="triangle-down"></view></view>
-  <view class="order-condition-item">更多条件<view class="triangle-down"></view></view>
-</view>
-
+<!-- 筛选条件 -->
+<select bindDate="selectRzsj" date="{{rzrq}}-{{tfrq}}" bindSelect="loadSxfy"
+ areaList="{{areaList}}"></select>
 
 <!-- 房间列表 -->
 <view class="room-list">
@@ -35,7 +29,7 @@
   <!-- 右侧房间列表 -->
   <view class="room-lis-right" style="height: {{roomListHeight}}px;">
     <scroll-view class="tjfy-box" scroll-y>
-      <view class="tjfy-box-fy" wx:for="{{sxfyList}}" bindtap="navigateToFjxq" data-hotelid="{{item.id}}">
+      <view class="tjfy-box-fy" wx:for="{{sxfyList}}" wx:key="unique" bindtap="navigateToFjxq" data-hotelid="{{item.id}}">
         <!-- 房源图片 -->
         <view class="tjfy-box-fy-image"><image src="{{item.url}}" class="tjfy-box-fy-image"/></view>
         <!-- 房源描述 -->

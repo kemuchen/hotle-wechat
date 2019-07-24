@@ -14,22 +14,28 @@ Page({
     tabList: [
       {
         index: 1,
-        name: '全部订单'
+        name: '全部订单',
+        ddzt: ''
       }, {
         index: 2,
-        name: '待支付'
+        name: '待支付',
+        ddzt: '1'
       }, {
         index: 3,
-        name: '待入住'
+        name: '待入住',
+        ddzt: '2'
       }, {
         index: 4,
-        name: '入驻中'
+        name: '入驻中',
+        ddzt: '3'
       }, {
         index: 5,
-        name: '已取消'
+        name: '已取消',
+        ddzt: '6'
       }, {
         index: 6,
-        name: '待评价'
+        name: '待评价',
+        ddzt: '4'
       }
     ],
     orderList: [],
@@ -67,24 +73,23 @@ Page({
    */
   swichNav: function(e) {
     if (e.detail.currentTab == 1) {
-      this.loadOrders('');
       this.setData({
         tabname: ''
       })
     } else {
-      this.loadOrders(e.detail.currentTab - 1);
       this.setData({
         tabname: this.data.tabList[e.detail.currentTab - 1].name
       })
     }
+    this.loadOrders(this.data.tabList[e.detail.currentTab - 1].ddzt);
   },
 
   /**
    * 跳转到订单详情界面
    */
-  navigateToOrderInfo: function() {
+  navigateToOrderInfo: function(e) {
     wx.navigateTo({
-      url: '/pages/order/orderinfo/orderinfo',
+      url: '/pages/order/orderinfo/orderinfo?orderid=' + e.currentTarget.dataset.orderid,
     })
   },
 
@@ -93,7 +98,7 @@ Page({
    */
   navigateToOrder: function(e) {
     wx.navigateTo({
-      url: '/pages/home/fjyd/fjyd',
+      url: '/pages/home/fjyd/fjyd?orderid=' + e.currentTarget.dataset.orderid,
     })
   },
 
@@ -119,6 +124,15 @@ Page({
   navigateToZzfw: function (e) {
     wx.navigateTo({
       url: '/pages/service/zzfw/zzfw?orderid=' + e.currentTarget.dataset.orderid,
+    })
+  },
+
+  /**
+   * 跳转到订单评价界面
+   */
+  navigateToPj: function (e) {
+    wx.navigateTo({
+      url: '/pages/order/orderinfo/orderinfo?orderid=' + e.currentTarget.dataset.orderid,
     })
   },
 

@@ -2,7 +2,7 @@
 <view class="swiperContainer">
   <!-- 房间图片展示 -->
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" bindchange="swiperChange">
-    <block wx:for="{{imgArr}}">
+    <block wx:for="{{imgArr}}" wx:key="unique">
       <swiper-item>
         <image src="{{item}}" bindtap="previewImg" data-index="{{index}}" mode="aspectFill" />
       </swiper-item>
@@ -26,7 +26,7 @@
 <tab tabList="{{tabList}}" bindswichNav="swichNav"></tab>
 <!-- 房型选择 -->
 <view class="tab-container" hidden="{{currentTab != 1}}">
-  <view class="fxxz-item" wx:for="{{fxList}}">
+  <view class="fxxz-item" wx:for="{{fxList}}" wx:key="unique">
     <view class="fxxz-info" bindtap="ckfjxx" data-typeid="{{item.id}}">
       <image src="{{item.imageUrl}}" class="fxxz-item-image"></image>
       <view class="fxxz-desc">
@@ -137,7 +137,7 @@
       <view class="fjpj-fjpf-zhpf-pjrs">({{yhpjList.length}}条评价)</view>
     </view>
     <view class="fjpj-fjpf-xjpf">
-      <view class="fjpj-fjpf-xjpf-item" wx:for="{{pfList}}">
+      <view class="fjpj-fjpf-xjpf-item" wx:for="{{pfList}}" wx:key="unique">
         <view class="fjpj-fjpf-xjpf-item-title">{{item.name}}</view>
         <view class="fjpj-fjpf-xjpf-item-xjsl">
           <image src="{{item.score >= 1 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
@@ -153,7 +153,7 @@
   <!-- 用户评价 -->
   <view class="yhpj-box">
     <view class="yhpj-title">共有{{yhpjList.length}}条评价</view>
-    <view class="yhpj-item" wx:for="{{yhpjList}}">
+    <view class="yhpj-item" wx:for="{{yhpjList}}" wx:key="unique">
       <view class="yhpj-yhxx-box">
         <view class="yhpj-yhxx">
           <image src="{{item.avator}}" class="yhpj-yhxx-avator"></image>
@@ -177,7 +177,7 @@
 </view>
 <!-- 附近房源 -->
 <scroll-view class="fjfy-box" scroll-y hidden="{{currentTab != 3}}">
-  <view class="fjfy-box-fy" wx:for="{{fjfyList}}" bindtap="navigateToFjxq" data-hotelid="item.id">
+  <view class="fjfy-box-fy" wx:for="{{fjfyList}}" wx:key="unique" bindtap="navigateToFjxq" data-hotelid="item.id">
     <!-- 房源图片 -->
     <view class="fjfy-box-fy-image">
       <image src="{{item.url}}" class="fjfy-box-fy-image" />

@@ -1,6 +1,6 @@
 <!-- 图片轮播 -->
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">
-  <block wx:for="{{ImageList}}">
+  <block wx:for="{{ImageList}}" wx:key="unique">
     <swiper-item>
       <image src="{{item.imageurl}}" class="slide-image" bindtap="redirectTo" data-link="{{item.link}}" />
     </swiper-item>
@@ -90,7 +90,7 @@
 
 <!-- 房源展示 -->
 <scroll-view class="tjfy-box" scroll-x>
-  <view class="tjfy-box-fy" wx:for="{{tjfyList}}" bindtap="navigateToFjxq" data-hotelid="{{item.id}}">
+  <view class="tjfy-box-fy" wx:for="{{tjfyList}}" wx:key="unique" bindtap="navigateToFjxq" data-hotelid="{{item.id}}">
     <!-- 房源图片 -->
     <view class="tjfy-box-fy-image">
       <image src="{{item.url}}" class="tjfy-box-fy-image" />

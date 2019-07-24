@@ -1,5 +1,6 @@
 // pages/personal/personal.js
 const util = require('../../utils/util.js')
+const request = require('../../utils/request.js')
 //获取应用实例
 const app = getApp()
 
@@ -84,6 +85,15 @@ Page({
               })
             },
           })
+          wx.getStorage({
+            key: 'vipInfo',
+            success: function (res) {
+              that.setData({
+                vipInfo: res.data
+              })
+              that.loadUserInfo();
+            },
+          })
         }
       },
     })
@@ -143,5 +153,39 @@ Page({
         url: '/pages/personal/login/login'
       })
     });
+  },
+
+  /**
+   * 加载用户信息
+   */
+  loadUserInfo: function() {
+    console.log(this.data.userInfo)
+    var that = this;
+    let params = {
+      url: app.globalData.serverUrl + 'getVipInfo',
+      body: {
+        id: this.data.vipInfo.id
+      }
+    }
+
+    request.doRequest(
+      params,
+      function (data) {
+        data.qbye = util.parseDouble(data.qbye);
+        wx.setStorage({
+          key: 'vipInfo',
+          data: data,
+        })
+        that.setData({
+          vipInfo: data
+        })
+      },
+      function (data) {
+        wx.showToast({
+          title: '请求错误',
+          icon: 'none'
+        })
+      }
+    )
   }
 })

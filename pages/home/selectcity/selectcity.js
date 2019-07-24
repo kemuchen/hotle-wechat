@@ -1,5 +1,5 @@
 //先引用城市数据文件
-var city = require('data.js')
+var city = require('city.js')
 var lineHeight = 0;
 var endWords = "";
 var isNum;
@@ -9,17 +9,18 @@ Page({
     cityName: "", //获取选中的城市名
 
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     // 生命周期函数--监听页面加载
 
 
   },
-  onReady: function () {
+  onReady: function() {
     // 生命周期函数--监听页面初次渲染完成
     var cityChild = city.City[0];
+    console.log(cityChild)
     var that = this;
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         lineHeight = (res.windowHeight - 100) / 22;
         console.log(res.windowHeight - 100)
         that.setData({
@@ -30,27 +31,27 @@ Page({
       }
     })
   },
-  onShow: function () {
+  onShow: function() {
     // 生命周期函数--监听页面显示
 
   },
-  onHide: function () {
+  onHide: function() {
     // 生命周期函数--监听页面隐藏
 
   },
-  onUnload: function () {
+  onUnload: function() {
     // 生命周期函数--监听页面卸载
 
   },
   //触发全部开始选择
-  chStart: function () {
+  chStart: function() {
     this.setData({
       trans: ".3",
       hidden: false
     })
   },
   //触发结束选择
-  chEnd: function () {
+  chEnd: function() {
     this.setData({
       trans: "0",
       hidden: true,
@@ -58,7 +59,7 @@ Page({
     })
   },
   //获取文字信息
-  getWords: function (e) {
+  getWords: function(e) {
     var id = e.target.id;
     this.endWords = id;
     isNum = id;
@@ -67,7 +68,7 @@ Page({
     })
   },
   //设置文字信息
-  setWords: function (e) {
+  setWords: function(e) {
     var id = e.target.id;
     this.setData({
       scrollTopId: id
@@ -75,16 +76,15 @@ Page({
   },
 
   // 滑动选择城市
-  chMove: function (e) {
+  chMove: function(e) {
     var y = e.touches[0].clientY;
     var offsettop = e.currentTarget.offsetTop;
     var height = 0;
-    var that = this;
-    ;
+    var that = this;;
     var cityarr = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"]
     // 获取y轴最大值
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         height = res.windowHeight - 10;
       }
     });
@@ -110,11 +110,17 @@ Page({
     }
   },
   //选择城市，并让选中的值显示在文本框里
-  bindCity: function (e) {
-    console.log(e);
+  bindCity: function(e) {
     var cityName = e.currentTarget.dataset.city;
-    this.setData({ cityName: cityName })
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];  //上一个页面
 
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      cityName: cityName
+    })
+    wx.navigateBack({
+      url: '/pages/home/search/search'
+    })
   }
-
 })
