@@ -51,11 +51,12 @@ Page({
     var that = this;
     wx.getStorage({
       key: 'vipInfo',
-      success: function(res) {
+      success: function (res) {
         if (res.data) {
           that.setData({
             userid: res.data.id
           })
+          console.log(that.data.currentTab);
           // 加载全部订单
           that.loadOrders('');
         } else {
@@ -132,7 +133,7 @@ Page({
    */
   navigateToPj: function (e) {
     wx.navigateTo({
-      url: '/pages/order/orderinfo/orderinfo?orderid=' + e.currentTarget.dataset.orderid,
+      url: '/pages/order/comment/comment?orderid=' + e.currentTarget.dataset.orderid + "&jdid=" + e.currentTarget.dataset.jdid,
     })
   },
 

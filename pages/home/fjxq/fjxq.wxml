@@ -92,7 +92,7 @@
 
     <view class="ssjs-box" style="margin-top: 25px;">
       <view class="fyjs-title" style="margin-bottom: 10px;">设施服务</view>
-      <view class="ssjs-item" wx:for="{{fjssList}}">
+      <view class="ssjs-item" wx:for="{{fjssList}}" wx:key="unique">
         <image src="{{item.icon}}" class="ssjs-item-icon"></image>
         <view class="ssjs-item-desc">{{item.name}}</view>
       </view>
@@ -133,20 +133,24 @@
 <view class="tab-container" hidden="{{currentTab != 2}}">
   <view class="fjpj-fjpf">
     <view class="fjpj-fjpf-zhpf">
-      <view class="fjpj-fjpf-zhpf-fs">5.0</view>
+      <view class="fjpj-fjpf-zhpf-fs">{{zhpf}}</view>
       <view class="fjpj-fjpf-zhpf-pjrs">({{yhpjList.length}}条评价)</view>
     </view>
     <view class="fjpj-fjpf-xjpf">
-      <view class="fjpj-fjpf-xjpf-item" wx:for="{{pfList}}" wx:key="unique">
-        <view class="fjpj-fjpf-xjpf-item-title">{{item.name}}</view>
-        <view class="fjpj-fjpf-xjpf-item-xjsl">
-          <image src="{{item.score >= 1 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-          <image src="{{item.score >= 2 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-          <image src="{{item.score >= 3 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-          <image src="{{item.score >= 4 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-          <image src="{{item.score >= 5 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-        </view>
-        <view class="fjpj-fjpf-xjpf-item-fs">{{item.score}}</view>
+      <view class="fjpj-fjpf-xjpf-item">
+        <view class="fjpj-fjpf-xjpf-item-title">设施评分</view>
+        <star star="{{sspf}}" enable="{{starEnable}}" showDesc="{{starSowDesc}}" starClass="star-item-icon-small"></star>
+        <view class="fjpj-fjpf-xjpf-item-fs">{{sspf}}</view>
+      </view>
+      <view class="fjpj-fjpf-xjpf-item">
+        <view class="fjpj-fjpf-xjpf-item-title">卫生评分</view>
+        <star star="{{wspf}}" enable="{{starEnable}}" showDesc="{{starSowDesc}}" starClass="star-item-icon-small"></star>
+        <view class="fjpj-fjpf-xjpf-item-fs">{{wspf}}</view>
+      </view>
+      <view class="fjpj-fjpf-xjpf-item">
+        <view class="fjpj-fjpf-xjpf-item-title">安全感</view>
+        <star star="{{aqg}}" enable="{{starEnable}}" showDesc="{{starSowDesc}}" starClass="star-item-icon-small"></star>
+        <view class="fjpj-fjpf-xjpf-item-fs">{{aqg}}</view>
       </view>
     </view>
   </view>
@@ -160,12 +164,8 @@
           <view class="yhpj-yhxx-info">
             <view class="yhpj-yhxx-info-name">{{item.username}}</view>
             <view class="yhpj-yhxx-info-score">
-              <image src="{{item.score >= 1 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-              <image src="{{item.score >= 2 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-              <image src="{{item.score >= 3 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-              <image src="{{item.score >= 4 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-              <image src="{{item.score >= 5 ? wjxFillingIcon : wjxIcon}}" class="fjpj-fjpf-xjpf-item-icon"></image>
-              <text style="font-size: 20rpx; margin-left: 5px;">{{item.score}}分</text>
+              <star star="{{item.score}}" enable="{{starEnable}}" showDesc="{{starSowDesc}}" starClass="star-item-icon-small" star="{{item.zhpf}}"></star>
+              <text style="font-size: 20rpx; margin-left: 5px;">{{item.zhpf}}分</text>
             </view>
           </view>
         </view>
@@ -185,7 +185,7 @@
     <!-- 房源描述 -->
     <view class="fjfy-box-fy-fypf">
       <view>{{item.star}}</view>
-      <view>评分：{{item.fypf}}</view>
+      <view>评分：{{item.score}}</view>
     </view>
     <view class="fjfy-box-fy-fymc">{{item.name}}</view>
     <view>

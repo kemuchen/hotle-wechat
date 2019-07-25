@@ -9,6 +9,7 @@ Page({
    */
   data: {
     calendarImage: '/resources/images/home/calendar.png',
+    ddzt: ['待支付', '待入住', '入住中', '待评价', '已完成', '已取消']
   },
 
   /**
@@ -48,7 +49,16 @@ Page({
         console.log(data);
         that.setData({
           hotel: data.hotel,
-          orderInfo: data.orderInfo
+          orderInfo: data.orderInfo,
+          rzts: util.dateUtil.convertToChinaNum(data.orderInfo.rzts) + '天',
+          sfje: util.parseDouble(data.orderInfo.sfje),
+          rzrq: util.dateUtil.formatTime(data.orderInfo.rzsj, 'M月D日'),
+          rzsj: util.dateUtil.formatTime(data.orderInfo.rzsj, 'H:F'),
+          rzrqWeek: util.dateUtil.getDetail(new Date(data.orderInfo.rzsj)).weekday,
+          ldrq: util.dateUtil.formatTime(data.orderInfo.ldsj, 'M月D日'),
+          ldsj: util.dateUtil.formatTime(data.orderInfo.ldsj, 'H:F'),
+          ldrqWeek: util.dateUtil.getDetail(new Date(data.orderInfo.ldsj)).weekday,
+          ddztName: that.data.ddzt[data.orderInfo.ddzt - 1]
         })
       },
       function (data) {

@@ -269,6 +269,8 @@
 }
 .yhpj-yhxx-info-score {
   display: flex;
+  margin-top: 5px;
+  margin-left: -5px;
 }
 .yhpj-pjsj {
   font-size: 25rpx;

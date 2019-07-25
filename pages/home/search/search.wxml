@@ -35,7 +35,7 @@
         <!-- 房源描述 -->
         <view class="tjfy-box-fy-fypf">
           <view>{{item.star}}</view>
-          <view>评分：{{item.fypf}}</view>
+          <view>评分：{{item.score}}</view>
         </view>
         <view class="tjfy-box-fy-fymc">{{item.name}}</view>
         <view><text style="font-size: 25rpx; color: red;">￥{{item.fjjg}}</text>

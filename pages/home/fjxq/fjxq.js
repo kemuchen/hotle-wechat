@@ -69,37 +69,13 @@ Page({
         score: '5.0'
       }
     ],
-    yhpjList: [
-      {
-        avator: '/resources/images/home/user.png',
-        username: '赵**莉',
-        score: '5.0',
-        pjsj: '2019-01-28 14:58:01',
-        pjnr: '特别不错的酒店'
-      }, {
-        avator: '/resources/images/home/user.png',
-        username: '刘**浩',
-        score: '4.0',
-        pjsj: '2019-01-28 14:58:01',
-        pjnr: '还不错'
-      }, {
-        avator: '/resources/images/home/user.png',
-        username: '张**三',
-        score: '5.0',
-        pjsj: '2019-01-28 14:58:01',
-        pjnr: '特别满意，非常棒'
-      }, {
-        avator: '/resources/images/home/user.png',
-        username: '李**四',
-        score: '3.0',
-        pjsj: '2019-01-28 14:58:01',
-        pjnr: '一般般'
-      },
-    ],
+    yhpjList: [],
     fjfyList: [],
     fxList: [],
     showModal: false,
-    hotel: {}
+    hotel: {},
+    starEnable: false,
+    starSowDesc: false
   },
 
   /**
@@ -251,14 +227,14 @@ Page({
     request.doRequest(
       params,
       function (data) {
-        console.log(data);
         that.setData({
           hotel: data.hotel,
           fxList: data.fxList,
-          yhpjList: data.yhpjList,
           fjfyList: data.fjfyList,
           imgArr: data.imgArr
-        })
+        });
+
+        that.setYhpj(data.yhpjList);
       },
       function (data) {
         wx.showToast({
@@ -268,4 +244,36 @@ Page({
       }
     )
   },
+
+  /**
+   * 设置用户评价列表
+   */
+  setYhpj: function (yhpjList) {
+    let zhpf = 0, sspf = 0, wspf = 0, aqg = 0;
+    if (yhpjList.length == 0) {
+      this.setData({
+        zhpf: 5,
+        sspf: 5,
+        wspf: 5,
+        aqg: 5,
+        yhpjList: yhpjList
+      })
+    } else {
+      for (var i = 0; i < yhpjList.length; i++) {
+        yhpjList[i].pjsj = util.dateUtil.format(new Date(yhpjList[i].pjsj), 'Y-M-D H:F:S');
+        zhpf += yhpjList[i].zhpf;
+        sspf += yhpjList[i].sspf;
+        wspf += yhpjList[i].wspf;
+        aqg += yhpjList[i].aqg;
+      }
+      this.setData({
+        zhpf: parseInt(zhpf / yhpjList.length),
+        sspf: parseInt(sspf / yhpjList.length),
+        wspf: parseInt(wspf / yhpjList.length),
+        aqg: parseInt(aqg / yhpjList.length),
+        yhpjList: yhpjList
+      })
+    }
+    
+  }
 })

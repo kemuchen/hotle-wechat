@@ -12,7 +12,7 @@
     </view>
 
     <!-- 订单信息 -->
-    <view class="order-item-info" bindtap="navigateToOrderInfo" data-orderid="{{item.orderid}}">
+    <view class="order-item-info" bindtap="navigateToOrderInfo" data-orderid="{{item.orderid}}" >
       <view class="order-item-info-image">
         <image src="{{imageSrc}}" class="order-item-info-image-image"></image>
       </view>
@@ -47,7 +47,7 @@
     <!-- 操作 -->
     <view class="order-item-oper" wx:if="{{item.ddzt == 4}}">
       <text class="order-item-oper-btn" bindtap="navigateToOrder" data-orderid="{{item.orderid}}">再次预定</text>
-      <text class="order-item-oper-btn" bindtap="navigateToPj" data-orderid="{{item.orderid}}">立即评价</text>
+      <text class="order-item-oper-btn" bindtap="navigateToPj" data-orderid="{{item.orderid}}" data-jdid="{{item.jdid}}">立即评价</text>
     </view>
   </view>
 

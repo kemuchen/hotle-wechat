@@ -267,6 +267,16 @@ let dateUtil = {
     sDate2 = new Date(sDate2);
     let iDays = parseInt((sDate1 - sDate2) / 1000 / 60 / 60 / 24); // 把相差的毫秒数转换为天数
     return iDays; //返回相差天数
+  },
+
+  /** 
+   * 时间戳转化为年 月 日 时 分 秒 
+   * number: 传入时间戳 
+   * format：返回格式，支持自定义，但参数必须与formateArr里保持一致 
+   */
+  formatTime: function formatTime(number, format) {
+    var date = new Date(number);
+    return this.format(date, format);
   }
 };
 
