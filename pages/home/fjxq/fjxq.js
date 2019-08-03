@@ -260,7 +260,6 @@ Page({
       })
     } else {
       for (var i = 0; i < yhpjList.length; i++) {
-        yhpjList[i].pjsj = util.dateUtil.format(new Date(yhpjList[i].pjsj), 'Y-M-D H:F:S');
         zhpf += yhpjList[i].zhpf;
         sspf += yhpjList[i].sspf;
         wspf += yhpjList[i].wspf;

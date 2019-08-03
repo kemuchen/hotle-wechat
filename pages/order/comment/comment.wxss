@@ -48,7 +48,7 @@
   justify-content: center;
 }
 .title {
-  width: 50px;
+  width: 60px;
   text-align: right;
   margin-top: 10px;
   font-size: 30rpx;
@@ -60,7 +60,7 @@
   align-items: center;
 }
 .pf-item-title {
-  width: 50px;
+  width: 60px;
   text-align: right;
   font-size: 30rpx;
   margin-right: 10px;

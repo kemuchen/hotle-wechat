@@ -33,12 +33,15 @@ page{
 }
 
 .triangle-down {
-  width: 0;
-  height: 0;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-top: 6px solid #000;
   margin-left: 5px;
+  width: 0px;
+  height: 0px;
+  border: 5px solid #4e4e4e;
+  border-top-color: #4e4e4e;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  margin-top: 3px;
 }
 
 .search-box-splid {
