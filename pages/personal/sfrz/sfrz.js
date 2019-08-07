@@ -67,15 +67,15 @@ Page({
         if (response.code == '0') {
           if (type == '1') {
             that.setData({
-              sfzzmImage: app.globalData.imageUrl + response.data.title
+              sfzzmImage: response.data[0]
             })
           } else if (type == '2') {
             that.setData({
-              sfzfmImage: app.globalData.imageUrl + response.data.title
+              sfzfmImage: response.data.data[0]
             })
           } else if (type == '3') {
             that.setData({
-              zpzImage: app.globalData.imageUrl + response.data.title
+              zpzImage: response.data.data[0]
             })
           }
         } else {

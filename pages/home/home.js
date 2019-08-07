@@ -234,7 +234,8 @@ Page({
     let params = {
       url: app.globalData.serverUrl + 'getHotels',
       body: {
-        city: app.globalData.user.address.city
+        city: app.globalData.user.address.city,
+        status: '1'
       }
     }
     let that = this;
